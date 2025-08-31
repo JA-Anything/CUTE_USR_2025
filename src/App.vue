@@ -73,10 +73,14 @@ const openContentPopup = (componentName: string) => {
   isMenuPopupVisible.value = false
 }
 
-// 修改此方法，在關閉內容彈窗時重新顯示選單彈窗
+// 修改此方法，在關閉內容彈窗時檢查是否有歷史選單，如果沒有則直接關閉
 const closeContentPopup = () => {
   currentPopupComponent.value = null
-  isMenuPopupVisible.value = true
+  if (menuHistory.value.length > 0) {
+    isMenuPopupVisible.value = true
+  } else {
+    isMenuPopupVisible.value = false
+  }
 }
 
 const openMenuPopup = (menuData: any) => {
