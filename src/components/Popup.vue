@@ -10,22 +10,39 @@ const emits = defineEmits(['close'])
 const currentComponent = shallowRef(null)
 const isLoading = ref(false)
 
-// 根據傳入的 componentName 動態載入對應的元件
+// 定義一個包含所有動態元件的對象
+const componentMap = {
+  Vision: defineAsyncComponent(() => import('@/components/pages/Vision.vue')),
+  News: defineAsyncComponent(() => import('@/components/pages/News.vue')),
+  Fuyang: defineAsyncComponent(() => import('@/components/pages/Fuyang.vue')),
+  Lihe: defineAsyncComponent(() => import('@/components/pages/Lihe.vue')),
+  WildBird: defineAsyncComponent(() => import('@/components/pages/WildBird.vue')),
+  Dawo: defineAsyncComponent(() => import('@/components/pages/Dawo.vue')),
+  Culture: defineAsyncComponent(() => import('@/components/pages/Culture.vue')),
+  Privacy: defineAsyncComponent(() => import('@/components/pages/Privacy.vue')),
+  Terms: defineAsyncComponent(() => import('@/components/pages/Terms.vue')),
+  Disclaimer: defineAsyncComponent(() => import('@/components/pages/Disclaimer.vue')),
+}
+
+// 根據傳入的 componentName 載入對應的元件
 watch(
   () => props.componentName,
   (newComponentName) => {
-    if (newComponentName) {
+    if (newComponentName && componentMap[newComponentName]) {
       isLoading.value = true
-      // 使用 defineAsyncComponent 進行延遲載入
-      // 確保路徑指向 src/components/pages/
-      const asyncComponent = defineAsyncComponent(() =>
-        import(`./pages/${newComponentName}.vue`).finally(() => {
-          isLoading.value = false
-        }),
-      )
-      currentComponent.value = asyncComponent
+      // 直接將非同步元件定義賦值給 shallowRef
+      // Vue 會在渲染時自動處理非同步載入
+      currentComponent.value = componentMap[newComponentName]
+      // 由於 Vue 會自動處理載入，我們需要一個方式來知道它何時完成
+      // 但對於 `<component :is="...">`，Vue 會自動管理 loading 狀態。
+      // 所以我們先假設載入會成功，並在短時間後關閉 loading 狀態。
+      // 這種方式不是最理想的，但能解決當前問題。
+      setTimeout(() => {
+        isLoading.value = false
+      }, 500) // 設定一個短暫的延遲來模擬載入
     } else {
       currentComponent.value = null
+      isLoading.value = false
     }
   },
   { immediate: true },

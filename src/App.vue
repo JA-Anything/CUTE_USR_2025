@@ -6,29 +6,51 @@ import MenuPopup from './components/MenuPopup.vue'
 // 定義選單和對應的元件名稱
 const headerMenu = [
   {
-    label: '關於我們',
+    label: '台北鳥會野鳥救傷中心',
     children: [
-      { label: '願景與使命', component: 'Vision' },
-      { label: '最新消息', component: 'News' },
+      { label: '城市常見野鳥', component: 'UrbanBirds' },
+      { label: '野鳥知識大挑戰', component: 'BirdQuiz' },
+      { label: '萌鳥DIY', component: 'CuteBirdDIY' },
+      { label: '野鳥救傷初步指引', component: 'RescueGuide' },
     ],
   },
   {
-    label: '生態公園',
+    label: '富陽自然生態公園',
     children: [
-      { label: '富陽自然生態公園', component: 'Fuyang' },
-      { label: '黎和生態公園', component: 'Lihe' },
+      { label: '濕地生態觀察區', component: 'WetlandObservation' },
+      { label: '戀戀蟬聲休憩區', component: 'CicadaRestArea' },
+      { label: '生態水道區', component: 'EcologyWaterway' },
     ],
   },
   {
-    label: '社區關懷',
+    label: '中國科技大學',
     children: [
-      { label: '野鳥救傷中心', component: 'WildBird' },
-      { label: '大我新舍', component: 'Dawo' },
+      {
+        label: '社區生態資源與生活',
+        children: [
+          { label: '活動預告', component: 'UpcomingEvents' },
+          { label: '歷史活動', component: 'HistoricalEvents' },
+        ],
+      },
     ],
   },
   {
-    label: '文化古蹟',
-    component: 'Culture',
+    label: '石泉巖清水祖師廟',
+    children: [
+      { label: '歷史古蹟', component: 'HistoricalSites' },
+      { label: '文化巡禮', component: 'CulturalTour' },
+    ],
+  },
+  {
+    label: '大我新舍',
+    children: [
+      { label: '老兵的故事', component: 'VeteransStories' },
+      { label: '大我巡禮', component: 'DawoTour' },
+    ],
+  },
+  {
+    label: '黎和生態公園',
+    children: [{ label: '黎和故事', component: 'LiheStory' }],
   },
 ]
 
