@@ -10,15 +10,55 @@ const emits = defineEmits(['close'])
 const currentComponent = shallowRef(null)
 const isLoading = ref(false)
 
-// 定義一個包含所有動態元件的對象
+// 定義一個包含所有動態元件的對象，並使用前綴來區分單元
 const componentMap = {
-  Vision: defineAsyncComponent(() => import('@/components/pages/Vision.vue')),
-  News: defineAsyncComponent(() => import('@/components/pages/News.vue')),
-  Fuyang: defineAsyncComponent(() => import('@/components/pages/Fuyang.vue')),
-  Lihe: defineAsyncComponent(() => import('@/components/pages/Lihe.vue')),
-  WildBird: defineAsyncComponent(() => import('@/components/pages/WildBird.vue')),
-  Dawo: defineAsyncComponent(() => import('@/components/pages/Dawo.vue')),
-  Culture: defineAsyncComponent(() => import('@/components/pages/Culture.vue')),
+  // 台北鳥會野鳥救傷中心
+  WildBirdUrbanBirds: defineAsyncComponent(
+    () => import('@/components/pages/WildBirdUrbanBirds.vue'),
+  ),
+  WildBirdQuiz: defineAsyncComponent(() => import('@/components/pages/WildBirdQuiz.vue')),
+  WildBirdCuteBirdDIY: defineAsyncComponent(
+    () => import('@/components/pages/WildBirdCuteBirdDIY.vue'),
+  ),
+  WildBirdGuide: defineAsyncComponent(() => import('@/components/pages/WildBirdGuide.vue')),
+
+  // 富陽自然生態公園
+  FuyangWetlandObservation: defineAsyncComponent(
+    () => import('@/components/pages/FuyangWetlandObservation.vue'),
+  ),
+  FuyangCicadaRestArea: defineAsyncComponent(
+    () => import('@/components/pages/FuyangCicadaRestArea.vue'),
+  ),
+  FuyangEcologyWaterway: defineAsyncComponent(
+    () => import('@/components/pages/FuyangEcologyWaterway.vue'),
+  ),
+
+  // 中國科技大學
+  CUTEUpcomingEvents: defineAsyncComponent(
+    () => import('@/components/pages/CUTEUpcomingEvents.vue'),
+  ),
+  CUTEHistoricalEvents: defineAsyncComponent(
+    () => import('@/components/pages/CUTEHistoricalEvents.vue'),
+  ),
+
+  // 石泉巖清水祖師廟
+  TempleHistoricalSites: defineAsyncComponent(
+    () => import('@/components/pages/TempleHistoricalSites.vue'),
+  ),
+  TempleCulturalTour: defineAsyncComponent(
+    () => import('@/components/pages/TempleCulturalTour.vue'),
+  ),
+
+  // 大我新舍
+  DawoVeteransStories: defineAsyncComponent(
+    () => import('@/components/pages/DawoVeteransStories.vue'),
+  ),
+  DawoTour: defineAsyncComponent(() => import('@/components/pages/DawoTour.vue')),
+
+  // 黎和生態公園
+  LiheStory: defineAsyncComponent(() => import('@/components/pages/LiheStory.vue')),
+
+  // 頁尾選單
   Privacy: defineAsyncComponent(() => import('@/components/pages/Privacy.vue')),
   Terms: defineAsyncComponent(() => import('@/components/pages/Terms.vue')),
   Disclaimer: defineAsyncComponent(() => import('@/components/pages/Disclaimer.vue')),

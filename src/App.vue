@@ -8,18 +8,18 @@ const headerMenu = [
   {
     label: '台北鳥會野鳥救傷中心',
     children: [
-      { label: '城市常見野鳥', component: 'UrbanBirds' },
-      { label: '野鳥知識大挑戰', component: 'BirdQuiz' },
-      { label: '萌鳥DIY', component: 'CuteBirdDIY' },
-      { label: '野鳥救傷初步指引', component: 'RescueGuide' },
+      { label: '城市常見野鳥', component: 'WildBirdUrbanBirds' },
+      { label: '野鳥知識大挑戰', component: 'WildBirdQuiz' },
+      { label: '萌鳥DIY', component: 'WildBirdCuteBirdDIY' },
+      { label: '野鳥救傷初步指引', component: 'WildBirdGuide' },
     ],
   },
   {
     label: '富陽自然生態公園',
     children: [
-      { label: '濕地生態觀察區', component: 'WetlandObservation' },
-      { label: '戀戀蟬聲休憩區', component: 'CicadaRestArea' },
-      { label: '生態水道區', component: 'EcologyWaterway' },
+      { label: '濕地生態觀察區', component: 'FuyangWetlandObservation' },
+      { label: '戀戀蟬聲休憩區', component: 'FuyangCicadaRestArea' },
+      { label: '生態水道區', component: 'FuyangEcologyWaterway' },
     ],
   },
   {
@@ -28,8 +28,8 @@ const headerMenu = [
       {
         label: '社區生態資源與生活',
         children: [
-          { label: '活動預告', component: 'UpcomingEvents' },
-          { label: '歷史活動', component: 'HistoricalEvents' },
+          { label: '活動預告', component: 'CUTEUpcomingEvents' },
+          { label: '歷史活動', component: 'CUTEHistoricalEvents' },
         ],
       },
     ],
@@ -37,14 +37,14 @@ const headerMenu = [
   {
     label: '石泉巖清水祖師廟',
     children: [
-      { label: '歷史古蹟', component: 'HistoricalSites' },
-      { label: '文化巡禮', component: 'CulturalTour' },
+      { label: '歷史古蹟', component: 'TempleHistoricalSites' },
+      { label: '文化巡禮', component: 'TempleCulturalTour' },
     ],
   },
   {
     label: '大我新舍',
     children: [
-      { label: '老兵的故事', component: 'VeteransStories' },
+      { label: '老兵的故事', component: 'DawoVeteransStories' },
       { label: '大我巡禮', component: 'DawoTour' },
     ],
   },
