@@ -1,13 +1,34 @@
-<script setup>
-import { defineProps, defineEmits } from 'vue'
+<script setup lang="ts">
+import { defineAsyncComponent, ref, shallowRef, watch } from 'vue'
 
-const props = defineProps({
-  title: String,
-  text: String,
-  image: String,
-})
+const props = defineProps<{
+  componentName: string | null
+}>()
 
 const emits = defineEmits(['close'])
+
+const currentComponent = shallowRef(null)
+const isLoading = ref(false)
+
+// 根據傳入的 componentName 動態載入對應的元件
+watch(
+  () => props.componentName,
+  (newComponentName) => {
+    if (newComponentName) {
+      isLoading.value = true
+      // 使用 defineAsyncComponent 進行延遲載入
+      const asyncComponent = defineAsyncComponent(() =>
+        import(`./pages/${newComponentName}.vue`).finally(() => {
+          isLoading.value = false
+        }),
+      )
+      currentComponent.value = asyncComponent
+    } else {
+      currentComponent.value = null
+    }
+  },
+  { immediate: true },
+)
 
 const closePopup = () => {
   emits('close')
@@ -15,12 +36,15 @@ const closePopup = () => {
 </script>
 
 <template>
-  <div class="popup-overlay" @click.self="closePopup">
+  <div class="popup-overlay" v-if="componentName" @click.self="closePopup">
     <div class="popup-content">
-      <button class="close-button" @click="closePopup">&times;</button>
-      <h2 class="popup-title">{{ props.title }}</h2>
-      <img v-if="props.image" :src="props.image" :alt="props.title" class="popup-image" />
-      <p class="popup-text">{{ props.text }}</p>
+      <div class="popup-header">
+        <button class="close-button" @click="closePopup">&times;</button>
+      </div>
+      <div class="popup-body">
+        <div v-if="isLoading" class="loading-indicator">載入中...</div>
+        <component v-else :is="currentComponent" />
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +56,7 @@ const closePopup = () => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,20 +66,28 @@ const closePopup = () => {
 
 .popup-content {
   background-color: #fff;
-  padding: 2rem;
   border-radius: 12px;
-  max-width: 90%;
-  width: 500px;
-  text-align: center;
+  width: 90vw;
+  height: 90vh;
+  max-width: 1200px;
+  max-height: 800px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   position: relative;
+  display: flex;
+  flex-direction: column;
   animation: fadeIn 0.3s ease-out;
+  overflow: hidden;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
 }
 
 .close-button {
-  position: absolute;
-  top: 10px;
-  right: 15px;
   background: none;
   border: none;
   font-size: 2rem;
@@ -68,40 +100,28 @@ const closePopup = () => {
   color: #333;
 }
 
-.popup-image {
-  max-width: 100%;
-  height: auto;
-  margin: 1rem 0;
-  border-radius: 8px;
+.popup-body {
+  flex-grow: 1;
+  width: 100%;
+  padding: 2rem;
+  overflow-y: auto;
 }
 
-.popup-title {
-  font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
-.popup-text {
-  font-size: 1rem;
-  line-height: 1.6;
+.loading-indicator {
+  text-align: center;
+  font-size: 1.2rem;
   color: #666;
-  white-space: pre-wrap;
+  margin-top: 2rem;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
     transform: scale(1);
-  }
-}
-
-@media (max-width: 768px) {
-  .popup-content {
-    padding: 1.5rem;
   }
 }
 </style>
