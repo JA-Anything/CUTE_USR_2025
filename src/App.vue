@@ -8,18 +8,18 @@ const headerMenu = [
   {
     label: '台北鳥會野鳥救傷中心',
     children: [
-      { label: '城市常見野鳥', component: 'WildBirdUrbanBirds' },
-      { label: '野鳥知識大挑戰', component: 'WildBirdQuiz' },
-      { label: '萌鳥DIY', component: 'WildBirdCuteBirdDIY' },
-      { label: '野鳥救傷初步指引', component: 'WildBirdGuide' },
+      { label: '城市常見野鳥', component: 'WildBirdUrbanBirds', path: '/wild-bird/urban-birds' },
+      { label: '野鳥知識大挑戰', component: 'WildBirdQuiz', path: '/wild-bird/quiz' },
+      { label: '萌鳥DIY', component: 'WildBirdCuteBirdDIY', path: '/wild-bird/diy' },
+      { label: '野鳥救傷初步指引', component: 'WildBirdGuide', path: '/wild-bird/guide' },
     ],
   },
   {
     label: '富陽自然生態公園',
     children: [
-      { label: '濕地生態觀察區', component: 'FuyangWetlandObservation' },
-      { label: '戀戀蟬聲休憩區', component: 'FuyangCicadaRestArea' },
-      { label: '生態水道區', component: 'FuyangEcologyWaterway' },
+      { label: '濕地生態觀察區', component: 'FuyangWetlandObservation', path: '/fuyang/wetland' },
+      { label: '戀戀蟬聲休憩區', component: 'FuyangCicadaRestArea', path: '/fuyang/cicada' },
+      { label: '生態水道區', component: 'FuyangEcologyWaterway', path: '/fuyang/waterway' },
     ],
   },
   {
@@ -28,8 +28,8 @@ const headerMenu = [
       {
         label: '社區生態資源與生活',
         children: [
-          { label: '活動預告', component: 'CUTEUpcomingEvents' },
-          { label: '歷史活動', component: 'CUTEHistoricalEvents' },
+          { label: '活動預告', component: 'CUTEUpcomingEvents', path: '/cute/upcoming-events' },
+          { label: '歷史活動', component: 'CUTEHistoricalEvents', path: '/cute/historical-events' },
         ],
       },
     ],
@@ -37,28 +37,28 @@ const headerMenu = [
   {
     label: '石泉巖清水祖師廟',
     children: [
-      { label: '歷史古蹟', component: 'TempleHistoricalSites' },
-      { label: '文化巡禮', component: 'TempleCulturalTour' },
+      { label: '歷史古蹟', component: 'TempleHistoricalSites', path: '/temple/historical-sites' },
+      { label: '文化巡禮', component: 'TempleCulturalTour', path: '/temple/cultural-tour' },
     ],
   },
   {
     label: '大我新舍',
     children: [
-      { label: '老兵的故事', component: 'DawoVeteransStories' },
-      { label: '大我巡禮', component: 'DawoTour' },
+      { label: '老兵的故事', component: 'DawoVeteransStories', path: '/dawo/veterans-stories' },
+      { label: '大我巡禮', component: 'DawoTour', path: '/dawo/tour' },
     ],
   },
   {
     label: '黎和生態公園',
-    children: [{ label: '黎和故事', component: 'LiheStory' }],
+    children: [{ label: '黎和故事', component: 'LiheStory', path: '/lihe/story' }],
   },
 ]
 
 // 定義 footer 選單
 const footerMenu = [
-  { label: '隱私權政策', component: 'Privacy' },
-  { label: '使用者條款', component: 'Terms' },
-  { label: '免責聲明', component: 'Disclaimer' },
+  { label: '隱私權政策', component: 'Privacy', path: '/privacy' },
+  { label: '使用者條款', component: 'Terms', path: '/terms' },
+  { label: '免責聲明', component: 'Disclaimer', path: '/disclaimer' },
 ]
 
 // 追蹤目前顯示的 popup 內容，初始為 null
