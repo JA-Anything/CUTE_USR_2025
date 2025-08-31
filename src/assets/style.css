@@ -1,0 +1,76 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+header {
+  background-color: #004d99; /* 深藍色 */
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+header nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+header nav a:hover {
+  color: #ffcc00; /* 黃色 */
+}
+
+#app {
+  min-height: 50vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+footer {
+  background-color: #333; /* 深灰色 */
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer nav ul {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+footer nav a {
+  color: white;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+footer nav a:hover {
+  opacity: 1;
+}
