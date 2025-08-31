@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
+import NestedMenu from './NestedMenu.vue'
 
 const props = defineProps<{
   menuItems: any[]
@@ -25,18 +26,11 @@ const goBack = () => {
   <div class="popup-overlay" @click.self="closePopup">
     <div class="menu-popup-content">
       <div class="popup-header">
-        <button v-if="hasHistory" class="back-button" @click="goBack">&larr; 回上一頁</button>
+        <!-- 回上一頁按鈕已不再需要，因為選單不會替換 -->
         <button class="close-button" @click="closePopup">&times;</button>
       </div>
       <ul class="menu-list">
-        <li v-for="(item, index) in menuItems" :key="index" @click.prevent="handleMenuClick(item)">
-          <a
-            href="#"
-            :class="{ 'menu-item-link': !item.children, 'menu-parent-link': item.children }"
-          >
-            {{ item.label }}
-          </a>
-        </li>
+        <NestedMenu :items="menuItems" @menu-item-click="handleMenuClick" />
       </ul>
     </div>
   </div>
@@ -70,7 +64,7 @@ const goBack = () => {
 
 .popup-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* 只顯示關閉按鈕 */
   align-items: center;
   padding: 0 0 10px 0;
   border-bottom: 1px solid #eee;

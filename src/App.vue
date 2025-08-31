@@ -96,8 +96,10 @@ const goToPreviousMenu = () => {
 
 const handleMenuClick = (item: any) => {
   if (item.component) {
+    // 如果有 component 屬性，表示這是最底層，打開內容 popup
     openContentPopup(item.component)
-  } else if (item.children) {
+  } else if (item.children && item.children.length > 0) {
+    // 如果有 children 屬性且不是空陣列，表示還有下一層，更新選單
     menuHistory.value.push(item.children)
     menuItems.value = item.children
   }
@@ -199,5 +201,39 @@ footer {
 
 footer p {
   margin: 0;
+}
+
+footer nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer nav li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* popup樣式 */
+#popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#popup-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 </style>
