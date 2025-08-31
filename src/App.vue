@@ -69,11 +69,14 @@ const menuHistory = ref<any[]>([])
 
 const openContentPopup = (componentName: string) => {
   currentPopupComponent.value = componentName
-  closeMenuPopup()
+  // 關閉 MenuPopup，但保留其狀態
+  isMenuPopupVisible.value = false
 }
 
+// 修改此方法，在關閉內容彈窗時重新顯示選單彈窗
 const closeContentPopup = () => {
   currentPopupComponent.value = null
+  isMenuPopupVisible.value = true
 }
 
 const openMenuPopup = (menuData: any) => {
