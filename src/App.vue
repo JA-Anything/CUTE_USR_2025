@@ -1,25 +1,33 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch, computed } from 'vue'
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 import Popup from './components/Popup.vue'
 import MenuPopup from './components/MenuPopup.vue'
 
-// 定義選單和對應的元件名稱
+const route = useRoute()
+const router = useRouter()
+
+// 定義選單和對應的路由路徑
 const headerMenu = [
   {
     label: '台北鳥會野鳥救傷中心',
     children: [
-      { label: '城市常見野鳥', component: 'WildBirdUrbanBirds', path: '/wild-bird/urban-birds' },
-      { label: '野鳥知識大挑戰', component: 'WildBirdQuiz', path: '/wild-bird/quiz' },
-      { label: '萌鳥DIY', component: 'WildBirdCuteBirdDIY', path: '/wild-bird/diy' },
-      { label: '野鳥救傷初步指引', component: 'WildBirdGuide', path: '/wild-bird/guide' },
+      { label: '城市常見野鳥', name: 'WildBirdUrbanBirds', path: '/wild-bird/urban-birds' },
+      { label: '野鳥知識大挑戰', name: 'WildBirdQuiz', path: '/wild-bird/quiz' },
+      { label: '萌鳥DIY', name: 'WildBirdCuteBirdDIY', path: '/wild-bird/cute-bird-diy' },
+      { label: '野鳥救傷初步指引', name: 'WildBirdGuide', path: '/wild-bird/guide' },
     ],
   },
   {
     label: '富陽自然生態公園',
     children: [
-      { label: '濕地生態觀察區', component: 'FuyangWetlandObservation', path: '/fuyang/wetland' },
-      { label: '戀戀蟬聲休憩區', component: 'FuyangCicadaRestArea', path: '/fuyang/cicada' },
-      { label: '生態水道區', component: 'FuyangEcologyWaterway', path: '/fuyang/waterway' },
+      {
+        label: '濕地生態觀察區',
+        name: 'FuyangWetlandObservation',
+        path: '/fuyang/wetland-observation',
+      },
+      { label: '戀戀蟬聲休憩區', name: 'FuyangCicadaRestArea', path: '/fuyang/cicada-rest-area' },
+      { label: '生態水道區', name: 'FuyangEcologyWaterway', path: '/fuyang/ecology-waterway' },
     ],
   },
   {
@@ -28,8 +36,8 @@ const headerMenu = [
       {
         label: '社區生態資源與生活',
         children: [
-          { label: '活動預告', component: 'CUTEUpcomingEvents', path: '/cute/upcoming-events' },
-          { label: '歷史活動', component: 'CUTEHistoricalEvents', path: '/cute/historical-events' },
+          { label: '活動預告', name: 'CUTEUpcomingEvents', path: '/cute/upcoming-events' },
+          { label: '歷史活動', name: 'CUTEHistoricalEvents', path: '/cute/historical-events' },
         ],
       },
     ],
@@ -37,28 +45,28 @@ const headerMenu = [
   {
     label: '石泉巖清水祖師廟',
     children: [
-      { label: '歷史古蹟', component: 'TempleHistoricalSites', path: '/temple/historical-sites' },
-      { label: '文化巡禮', component: 'TempleCulturalTour', path: '/temple/cultural-tour' },
+      { label: '歷史古蹟', name: 'TempleHistoricalSites', path: '/temple/historical-sites' },
+      { label: '文化巡禮', name: 'TempleCulturalTour', path: '/temple/cultural-tour' },
     ],
   },
   {
     label: '大我新舍',
     children: [
-      { label: '老兵的故事', component: 'DawoVeteransStories', path: '/dawo/veterans-stories' },
-      { label: '大我巡禮', component: 'DawoTour', path: '/dawo/tour' },
+      { label: '老兵的故事', name: 'DawoVeteransStories', path: '/dawo/veterans-stories' },
+      { label: '大我巡禮', name: 'DawoTour', path: '/dawo/tour' },
     ],
   },
   {
     label: '黎和生態公園',
-    children: [{ label: '黎和故事', component: 'LiheStory', path: '/lihe/story' }],
+    children: [{ label: '黎和故事', name: 'LiheStory', path: '/lihe/story' }],
   },
 ]
 
 // 定義 footer 選單
 const footerMenu = [
-  { label: '隱私權政策', component: 'Privacy', path: '/privacy' },
-  { label: '使用者條款', component: 'Terms', path: '/terms' },
-  { label: '免責聲明', component: 'Disclaimer', path: '/disclaimer' },
+  { label: '隱私權政策', name: 'Privacy', path: '/privacy' },
+  { label: '使用者條款', name: 'Terms', path: '/terms' },
+  { label: '免責聲明', name: 'Disclaimer', path: '/disclaimer' },
 ]
 
 // 追蹤目前顯示的 popup 內容，初始為 null
@@ -67,23 +75,24 @@ const isMenuPopupVisible = ref(false)
 const menuItems = ref([])
 const menuHistory = ref<any[]>([])
 
-const openContentPopup = (componentName: string) => {
-  currentPopupComponent.value = componentName
-  // 關閉 MenuPopup，但保留其狀態
-  isMenuPopupVisible.value = false
-}
-
-// 修改此方法，在關閉內容彈窗時檢查是否有歷史選單，如果沒有則直接關閉
-const closeContentPopup = () => {
-  currentPopupComponent.value = null
-  if (menuHistory.value.length > 0) {
-    isMenuPopupVisible.value = true
-  } else {
+// 監聽路由變化，決定是否顯示 popup
+watch(
+  () => route.name,
+  (newName) => {
+    // 檢查路由名稱是否應顯示在 popup 中 (所有非 'home' 的路由)
+    if (newName && newName !== 'home') {
+      currentPopupComponent.value = newName as string
+    } else {
+      currentPopupComponent.value = null
+    }
+    // 每次路由變更都關閉 MenuPopup
     isMenuPopupVisible.value = false
-  }
-}
+    menuHistory.value = []
+    menuItems.value = []
+  },
+)
 
-const openMenuPopup = (menuData: any) => {
+const openMenuPopup = (menuData: any[]) => {
   menuItems.value = menuData
   menuHistory.value = [menuData]
   isMenuPopupVisible.value = true
@@ -92,6 +101,7 @@ const openMenuPopup = (menuData: any) => {
 const closeMenuPopup = () => {
   isMenuPopupVisible.value = false
   menuHistory.value = []
+  menuItems.value = []
 }
 
 const goToPreviousMenu = () => {
@@ -102,11 +112,9 @@ const goToPreviousMenu = () => {
 }
 
 const handleMenuClick = (item: any) => {
-  if (item.component) {
-    // 如果有 component 屬性，表示這是最底層，打開內容 popup
-    openContentPopup(item.component)
+  if (item.path) {
+    router.push({ name: item.name })
   } else if (item.children && item.children.length > 0) {
-    // 如果有 children 屬性且不是空陣列，表示還有下一層，更新選單
     menuHistory.value.push(item.children)
     menuItems.value = item.children
   }
@@ -115,13 +123,11 @@ const handleMenuClick = (item: any) => {
 
 <template>
   <header>
-    <h1>中國科技大學通識中心</h1>
+    <h1><RouterLink to="/">中國科技大學通識中心</RouterLink></h1>
     <nav>
       <ul>
         <li v-for="(item, index) in headerMenu" :key="index">
-          <a v-if="item.component" href="#" @click.prevent="openContentPopup(item.component)">{{
-            item.label
-          }}</a>
+          <RouterLink v-if="item.path" :to="item.path">{{ item.label }}</RouterLink>
           <a v-else href="#" @click.prevent="openMenuPopup(item.children)">{{ item.label }}</a>
         </li>
       </ul>
@@ -129,7 +135,7 @@ const handleMenuClick = (item: any) => {
   </header>
 
   <main>
-    <!-- 這裡可以放您的頁面主要內容 -->
+    <RouterView />
   </main>
 
   <footer>
@@ -137,13 +143,12 @@ const handleMenuClick = (item: any) => {
     <nav>
       <ul>
         <li v-for="(item, index) in footerMenu" :key="index">
-          <a href="#" @click.prevent="openContentPopup(item.component)">{{ item.label }}</a>
+          <RouterLink :to="item.path">{{ item.label }}</RouterLink>
         </li>
       </ul>
     </nav>
   </footer>
 
-  <!-- 顯示 header 的多層級選單 popup -->
   <MenuPopup
     v-if="isMenuPopupVisible"
     :menuItems="menuItems"
@@ -153,8 +158,7 @@ const handleMenuClick = (item: any) => {
     @go-back="goToPreviousMenu"
   />
 
-  <!-- 顯示內容元件的 popup (Dialog) -->
-  <Popup :component-name="currentPopupComponent" @close="closeContentPopup" />
+  <Popup :component-name="currentPopupComponent" />
 </template>
 
 <style scoped>
@@ -171,6 +175,11 @@ header {
 header h1 {
   margin: 0;
   font-size: 1.5rem;
+}
+
+header h1 a {
+  color: #fff;
+  text-decoration: none;
 }
 
 header nav ul,
@@ -219,28 +228,5 @@ footer nav ul {
 footer nav li a {
   color: #fff;
   text-decoration: none;
-}
-
-/* popup樣式 */
-#popup-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-#popup-content {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  max-width: 500px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 </style>

@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref, shallowRef, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
-const props = defineProps<{
-  componentName: string | null
-}>()
-
-const emits = defineEmits(['close'])
+const route = useRoute()
+const router = useRouter()
 
 const currentComponent = shallowRef(null)
 const isLoading = ref(false)
@@ -66,7 +64,7 @@ const componentMap = {
 
 // 根據傳入的 componentName 載入對應的元件
 watch(
-  () => props.componentName,
+  () => route.name,
   (newComponentName) => {
     if (newComponentName && componentMap[newComponentName]) {
       isLoading.value = true
@@ -89,12 +87,12 @@ watch(
 )
 
 const closePopup = () => {
-  emits('close')
+  router.push('/')
 }
 </script>
 
 <template>
-  <div class="popup-overlay" v-if="componentName" @click.self="closePopup">
+  <div class="popup-overlay" v-if="currentComponent" @click.self="closePopup">
     <div class="popup-content">
       <div class="popup-header">
         <button class="close-button" @click="closePopup">&times;</button>

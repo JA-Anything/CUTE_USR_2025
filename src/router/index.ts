@@ -16,137 +16,105 @@ import WildBirdGuide from '@/components/pages/WildBirdGuide.vue'
 import WildBirdUrbanBirds from '@/components/pages/WildBirdUrbanBirds.vue'
 import WildBirdQuiz from '@/components/pages/WildBirdQuiz.vue'
 import WildBirdCuteBirdDIY from '@/components/pages/WildBirdCuteBirdDIY.vue'
+import Home from '@/components/pages/Home.vue'
 import RouterLayout from '@/components/RouterLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/wild-bird',
-      name: 'wild-bird',
-      component: RouterLayout,
-      children: [
-        {
-          path: 'guide',
-          name: 'WildBirdGuide',
-          component: WildBirdGuide,
-        },
-        {
-          path: 'urban-birds',
-          name: 'WildBirdUrbanBirds',
-          component: WildBirdUrbanBirds,
-        },
-        {
-          path: 'quiz',
-          name: 'WildBirdQuiz',
-          component: WildBirdQuiz,
-        },
-        {
-          path: 'cute-bird-diy',
-          name: 'WildBirdCuteBirdDIY',
-          component: WildBirdCuteBirdDIY,
-        },
-      ],
+      path: '/',
+      name: 'home',
+      component: Home,
     },
     {
-      path: '/fuyang',
-      name: 'fuyang',
-      component: RouterLayout,
-      children: [
-        {
-          path: 'cicada-rest-area',
-          name: 'FuyangCicadaRestArea',
-          component: FuyangCicadaRestArea,
-        },
-        {
-          path: 'ecology-waterway',
-          name: 'FuyangEcologyWaterway',
-          component: FuyangEcologyWaterway,
-        },
-        {
-          path: 'wetland-observation',
-          name: 'FuyangWetlandObservation',
-          component: FuyangWetlandObservation,
-        },
-      ],
+      path: '/wild-bird/guide',
+      name: 'WildBirdGuide',
+      component: WildBirdGuide,
     },
     {
-      path: '/cute',
-      name: 'cute',
-      component: RouterLayout,
-      children: [
-        {
-          path: 'upcoming-events',
-          name: 'CUTEUpcomingEvents',
-          component: CUTEUpcomingEvents,
-        },
-        {
-          path: 'historical-events',
-          name: 'CUTEHistoricalEvents',
-          component: CUTEHistoricalEvents,
-        },
-      ],
+      path: '/wild-bird/urban-birds',
+      name: 'WildBirdUrbanBirds',
+      component: WildBirdUrbanBirds,
     },
     {
-      path: '/temple',
-      name: 'temple',
-      component: RouterLayout,
-      children: [
-        {
-          path: 'historical-sites',
-          name: 'TempleHistoricalSites',
-          component: TempleHistoricalSites,
-        },
-        {
-          path: 'cultural-tour',
-          name: 'TempleCulturalTour',
-          component: TempleCulturalTour,
-        },
-      ],
+      path: '/wild-bird/quiz',
+      name: 'WildBirdQuiz',
+      component: WildBirdQuiz,
     },
     {
-      path: '/dawo',
-      name: 'dawo',
-      component: RouterLayout,
-      children: [
-        {
-          path: 'veterans-stories',
-          name: 'DawoVeteransStories',
-          component: DawoVeteransStories,
-        },
-        {
-          path: 'tour',
-          name: 'DawoTour',
-          component: DawoTour,
-        },
-      ],
+      path: '/wild-bird/cute-bird-diy',
+      name: 'WildBirdCuteBirdDIY',
+      component: WildBirdCuteBirdDIY,
     },
     {
-      path: '/lihe',
-      name: 'lihe',
-      component: RouterLayout,
-      children: [
-        {
-          path: 'story',
-          name: 'LiheStory',
-          component: LiheStory,
-        },
-      ],
+      path: '/fuyang/cicada-rest-area',
+      name: 'FuyangCicadaRestArea',
+      component: FuyangCicadaRestArea,
+    },
+    {
+      path: '/fuyang/ecology-waterway',
+      name: 'FuyangEcologyWaterway',
+      component: FuyangEcologyWaterway,
+    },
+    {
+      path: '/fuyang/wetland-observation',
+      name: 'FuyangWetlandObservation',
+      component: FuyangWetlandObservation,
+    },
+    {
+      path: '/cute/upcoming-events',
+      name: 'CUTEUpcomingEvents',
+      component: CUTEUpcomingEvents,
+    },
+    {
+      path: '/cute/historical-events',
+      name: 'CUTEHistoricalEvents',
+      component: CUTEHistoricalEvents,
+    },
+    {
+      path: '/temple/historical-sites',
+      name: 'TempleHistoricalSites',
+      component: TempleHistoricalSites,
+    },
+    {
+      path: '/temple/cultural-tour',
+      name: 'TempleCulturalTour',
+      component: TempleCulturalTour,
+    },
+    {
+      path: '/dawo/veterans-stories',
+      name: 'DawoVeteransStories',
+      component: DawoVeteransStories,
+    },
+    {
+      path: '/dawo/tour',
+      name: 'DawoTour',
+      component: DawoTour,
+    },
+    {
+      path: '/lihe/story',
+      name: 'LiheStory',
+      component: LiheStory,
     },
     {
       path: '/privacy',
-      name: 'privacy',
+      name: 'Privacy',
       component: Privacy,
     },
     {
       path: '/terms',
-      name: 'terms',
+      name: 'Terms',
       component: Terms,
     },
     {
       path: '/disclaimer',
-      name: 'disclaimer',
+      name: 'Disclaimer',
       component: Disclaimer,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/',
     },
   ],
   scrollBehavior(to, from, savedPosition) {

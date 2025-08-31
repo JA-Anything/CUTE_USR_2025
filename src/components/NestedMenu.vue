@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, ref, defineAsyncComponent } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 // 定義組件 props 和 emits
 const props = defineProps<{
@@ -19,12 +22,9 @@ const toggleExpand = (item: any, index: number) => {
     const itemId = item.label + index
     expandedItems.value[itemId] = !expandedItems.value[itemId]
   } else {
-    emits('menu-item-click', item)
+    // 點擊最底層的項目時，直接導向對應的路由
+    router.push({ name: item.name })
   }
-}
-
-const handleChildClick = (item: any) => {
-  emits('menu-item-click', item)
 }
 </script>
 
