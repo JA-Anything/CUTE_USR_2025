@@ -1,0 +1,120 @@
+//* Media Queries
+//Hint: @include pad{}
+@mixin sm {
+    @media screen and (min-width: 375px) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media screen and (min-width: 600px) {
+        @content;
+    }
+}
+
+@mixin pad {
+
+    //常用 744px or 768px
+    @media screen and (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin lg {
+    @media screen and (min-width: 1024px) {
+        @content;
+    }
+}
+
+@mixin xl {
+
+    //常用
+    @media screen and (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin dt {
+
+    //常用
+    @media screen and (min-width: 1440px) {
+        @content;
+    }
+}
+
+@mixin bdt {
+    @media screen and (min-width: 1920px) {
+        @content;
+    }
+}
+
+@mixin ie {
+
+    //常用
+    @media all and (-ms-high-contrast: none),
+    (-ms-high-contrast: active) {
+        @content;
+    }
+}
+
+//* Extend
+//Hint: extend %??;
+%translateXY {
+    transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+%translateX {
+    transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+}
+
+%translateY {
+    transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+}
+
+%transition {
+    transition: all 0.8s;
+}
+
+%clearfix {
+    &:after {
+        content: ' ';
+        display: table;
+        clear: both;
+    }
+}
+
+%bgBlur {
+    backdrop-filter: blur(8px);
+}
+
+//* IE KV
+//Hint: @include ieKv($ieMq: px, $ieBgi: url(''), $ieImgH: vw);
+// @mixin ieKv($ieMq, $ieBgi, $ieImgH, $ieImgMaxH) {
+
+//     @media all and (-ms-high-contrast: none),
+//     (-ms-high-contrast: active) {
+//         @media screen and (min-width: $ieMq) {
+//             .kv {
+//                 background-image: $ieBgi; //url('')
+//                 background-repeat: no-repeat;
+//                 background-size: contain;
+//                 background-position: top center;
+//             }
+
+//             img {
+//                 opacity: 0;
+//                 height: $ieImgH; //圖片高度vw
+//                 max-height: $ieImgMaxH; //圖片最大高度px
+//             }
+//         }
+//     }
+// }

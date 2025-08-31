@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 // 匯入共用樣式表，透過 Vite 進行管理
-import '@/assets/style.css'
+import '@/assets/scss/style.scss'
 
 import App from './App.vue'
 import router from './router'

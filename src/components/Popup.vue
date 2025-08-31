@@ -162,6 +162,7 @@ const closePopup = () => {
   flex-grow: 1;
   width: 100%;
   padding: 2rem;
+  box-sizing: border-box;
   overflow-y: auto;
 }
 
