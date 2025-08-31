@@ -87,7 +87,6 @@ const handleMenuClick = (item: any) => {
     <h1>中國科技大學通識中心</h1>
     <nav>
       <ul>
-        <li><a href="#" @click.prevent="closeContentPopup">首頁</a></li>
         <li v-for="(item, index) in headerMenu" :key="index">
           <a v-if="item.component" href="#" @click.prevent="openContentPopup(item.component)">{{
             item.label

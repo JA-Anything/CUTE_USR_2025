@@ -17,6 +17,7 @@ watch(
     if (newComponentName) {
       isLoading.value = true
       // 使用 defineAsyncComponent 進行延遲載入
+      // 確保路徑指向 src/components/pages/
       const asyncComponent = defineAsyncComponent(() =>
         import(`./pages/${newComponentName}.vue`).finally(() => {
           isLoading.value = false

@@ -46,12 +46,6 @@ $(document).ready(function () {
     }
   })
 
-  // 處理首頁連結點擊事件
-  $('#home-link').on('click', function (e) {
-    e.preventDefault()
-    popupContainer.fadeOut()
-  })
-
   // 點擊彈出式視窗背景關閉視窗
   popupContainer.on('click', function (e) {
     if ($(e.target).is(popupContainer)) {
