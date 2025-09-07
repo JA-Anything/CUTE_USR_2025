@@ -1,0 +1,1 @@
+import{_ as o,c as a,o as s,a as t}from"./index-C6se3r4H.js";const n={},c={class:"content-page"};function r(l,e){return s(),a("div",c,[...e[0]||(e[0]=[t("h2",null,"石泉巖清水祖師廟 文化巡禮",-1),t("p",null," 本中心致力於推廣六張犁地區的文化古蹟，透過舉辦導覽活動，讓學生與社區民眾認識在地歷史，並珍惜這些寶貴的文化遺產。 ",-1)])])}const d=o(n,[["render",r],["__scopeId","data-v-a240821f"]]);export{d as default};

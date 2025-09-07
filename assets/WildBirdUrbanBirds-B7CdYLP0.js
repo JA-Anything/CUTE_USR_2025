@@ -1,0 +1,1 @@
+import{_ as t,c as a,o as n,a as s}from"./index-C6se3r4H.js";const o={},c={class:"content-page"};function r(d,e){return n(),a("div",c,[...e[0]||(e[0]=[s("h2",null,"野鳥救傷中心",-1),s("p",null,"我們的野鳥救傷中心致力於保護和拯救受傷的野生鳥類，並進行野放訓練，讓牠們能夠重返大自然。",-1)])])}const l=t(o,[["render",r],["__scopeId","data-v-6ab6b3c6"]]);export{l as default};

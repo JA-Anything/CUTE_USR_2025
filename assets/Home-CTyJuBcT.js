@@ -1,0 +1,1 @@
+import{_ as t,c as a,o as s,a as o}from"./index-C6se3r4H.js";const n={},c={class:"content-page"};function r(_,e){return s(),a("div",c,[...e[0]||(e[0]=[o("h2",null,"歡迎來到中國科技大學通識中心",-1),o("p",null," 本網站致力於推廣多元文化、環境保護與社區教育。請使用上方或下方的選單來瀏覽我們的活動與資源。 ",-1)])])}const d=t(n,[["render",r],["__scopeId","data-v-1b0a3ab6"]]);export{d as default};

@@ -1,0 +1,1 @@
+import{_ as t,c as s,o as a,a as o}from"./index-C6se3r4H.js";const c={},n={class:"content-page"};function r(_,e){return a(),s("div",n,[...e[0]||(e[0]=[o("h2",null,"大我新舍 大我巡禮",-1),o("p",null,"大我新舍為中國科技大學學生的宿舍，提供安全、舒適且便利的住宿環境，是學生們的第二個家。",-1)])])}const l=t(c,[["render",r],["__scopeId","data-v-4cbd1b82"]]);export{l as default};
