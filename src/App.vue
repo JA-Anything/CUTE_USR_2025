@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, type Ref } from 'vue'
 import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 import Popup from './components/Popup.vue'
 import MenuPopup from './components/MenuPopup.vue'
+
+// 定義選單項目的型別
+interface MenuItem {
+  label: string
+  name?: string
+  path?: string
+  children?: MenuItem[]
+}
 
 const route = useRoute()
 const router = useRouter()
 
 // 定義選單和對應的路由路徑
-const headerMenu = [
+const headerMenu: MenuItem[] = [
   {
     label: '台北鳥會野鳥救傷中心',
     children: [
@@ -72,13 +80,13 @@ const footerMenu = [
 // 追蹤目前顯示的 popup 內容，初始為 null
 const currentPopupComponent = ref<string | null>(null)
 const isMenuPopupVisible = ref(false)
-const menuItems = ref([])
-const menuHistory = ref<any[]>([])
+const menuItems: Ref<MenuItem[]> = ref([])
+const menuHistory: Ref<MenuItem[][]> = ref([])
 
 // 監聽路由變化，決定是否顯示 popup
 watch(
   () => route.name,
-  (newName) => {
+  (newName: string | symbol | null) => {
     // 檢查路由名稱是否應顯示在 popup 中 (所有非 'home' 的路由)
     if (newName && newName !== 'home') {
       currentPopupComponent.value = newName as string
@@ -92,10 +100,12 @@ watch(
   },
 )
 
-const openMenuPopup = (menuData: any[]) => {
-  menuItems.value = menuData
-  menuHistory.value = [menuData]
-  isMenuPopupVisible.value = true
+const openMenuPopup = (menuData: MenuItem[] | undefined) => {
+  if (menuData) {
+    menuItems.value = menuData
+    menuHistory.value = [menuData]
+    isMenuPopupVisible.value = true
+  }
 }
 
 const closeMenuPopup = () => {
@@ -111,9 +121,10 @@ const goToPreviousMenu = () => {
   }
 }
 
-const handleMenuClick = (item: any) => {
+const handleMenuClick = (item: MenuItem) => {
   if (item.path) {
     router.push({ name: item.name })
+    closeMenuPopup() // 導航後關閉選單
   } else if (item.children && item.children.length > 0) {
     menuHistory.value.push(item.children)
     menuItems.value = item.children

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref, shallowRef, watch } from 'vue'
+import type { Component } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
 
-const currentComponent = shallowRef(null)
+const currentComponent = shallowRef<Component | null>(null)
 const isLoading = ref(false)
 
 // 定義一個包含所有動態元件的對象，並使用前綴來區分單元
@@ -60,24 +61,19 @@ const componentMap = {
   Privacy: defineAsyncComponent(() => import('@/components/pages/Privacy.vue')),
   Terms: defineAsyncComponent(() => import('@/components/pages/Terms.vue')),
   Disclaimer: defineAsyncComponent(() => import('@/components/pages/Disclaimer.vue')),
-}
+} as Record<string, Component>
 
 // 根據傳入的 componentName 載入對應的元件
 watch(
   () => route.name,
   (newComponentName) => {
-    if (newComponentName && componentMap[newComponentName]) {
+    if (newComponentName && componentMap[newComponentName as string]) {
       isLoading.value = true
-      // 直接將非同步元件定義賦值給 shallowRef
-      // Vue 會在渲染時自動處理非同步載入
-      currentComponent.value = componentMap[newComponentName]
-      // 由於 Vue 會自動處理載入，我們需要一個方式來知道它何時完成
-      // 但對於 `<component :is="...">`，Vue 會自動管理 loading 狀態。
-      // 所以我們先假設載入會成功，並在短時間後關閉 loading 狀態。
-      // 這種方式不是最理想的，但能解決當前問題。
+      currentComponent.value = componentMap[newComponentName as string]
+
       setTimeout(() => {
         isLoading.value = false
-      }, 500) // 設定一個短暫的延遲來模擬載入
+      }, 500)
     } else {
       currentComponent.value = null
       isLoading.value = false

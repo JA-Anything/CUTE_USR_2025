@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref, defineAsyncComponent } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -22,8 +22,8 @@ const toggleExpand = (item: any, index: number) => {
     const itemId = item.label + index
     expandedItems.value[itemId] = !expandedItems.value[itemId]
   } else {
-    // 點擊最底層的項目時，直接導向對應的路由
-    router.push({ name: item.name })
+    // 點擊最底層的項目時，發出事件給父元件處理
+    emits('menu-item-click', item)
   }
 }
 </script>
@@ -47,7 +47,11 @@ const toggleExpand = (item: any, index: number) => {
         </a>
       </div>
       <ul v-if="item.children && expandedItems[item.label + index]" class="submenu-list">
-        <NestedMenu :items="item.children" @menu-item-click="handleChildClick" />
+        <!-- 這裡不再需要處理 handleChildClick，因為父元件會直接接收事件 -->
+        <NestedMenu
+          :items="item.children"
+          @menu-item-click="(childItem) => emits('menu-item-click', childItem)"
+        />
       </ul>
     </li>
   </ul>

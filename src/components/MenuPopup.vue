@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
-import NestedMenu from './NestedMenu.vue'
 import { useRouter } from 'vue-router'
+import NestedMenu from './NestedMenu.vue'
 
 const router = useRouter()
 
 const props = defineProps<{
   menuItems: any[]
+  hasHistory: boolean
 }>()
 
 const emits = defineEmits(['close', 'menu-click', 'go-back'])
@@ -15,13 +15,9 @@ const closePopup = () => {
   emits('close')
 }
 
+// 這個函式會接收到來自 NestedMenu 的點擊事件
 const handleMenuClick = (item: any) => {
-  if (item.name) {
-    router.push({ name: item.name })
-    emits('close')
-  } else if (item.children) {
-    emits('menu-click', item)
-  }
+  emits('menu-click', item)
 }
 
 const goBack = () => {
