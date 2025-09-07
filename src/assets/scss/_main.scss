@@ -1,0 +1,836 @@
+//* Import
+@import "base";
+@import "variables";
+@import "nav";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap");
+
+//* Selection
+@mixin selection($selectionBg, $selectionC) {
+  ::selection {
+    background: $selectionBg;
+    color: $selectionC;
+  }
+  ::-moz-selection {
+    background: $selectionBg;
+    color: $selectionC;
+  }
+}
+
+//* Scrollbar
+@mixin scrollbar($scrollbarW, $scrollbarTrack, $scrollbarThumb, $scrollbarThumbHover) {
+  ::-webkit-scrollbar {
+    width: $scrollbarW;
+  }
+  ::-webkit-scrollbar-track {
+    background: $scrollbarTrack;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: $scrollbarThumb;
+    border-radius: 10px;
+    &:hover {
+      background: $scrollbarThumbHover;
+    }
+  }
+}
+
+//* Setting
+* {
+  box-sizing: border-box;
+
+  &:focus {
+    outline-style: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  margin: 0 auto;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 50px;
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    @include pad {
+      height: 62px;
+    }
+  }
+}
+
+.clearfix {
+  *zoom: 1;
+
+  /*For IE 6&7 only*/
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.video iframe {
+  width: 96%;
+  margin: 0 2%;
+  z-index: 100;
+  position: relative;
+}
+
+//* Body Mixin
+//Hint: @include in body
+@mixin themeDark {
+  color: $wh;
+  background-color: $bg;
+
+  header {
+    background-color: rgba($hdDark, 1);
+
+    &.float {
+      background-color: rgba($hdDark, 0.95); //? if alpha=1 add backdrop-filter: blur(0px);
+    }
+  }
+
+  header,
+  footer {
+    .container {
+      .link {
+        .myvideo {
+          a {
+            svg {
+              .icon-bg {
+                fill: $wh;
+              }
+            }
+          }
+        }
+
+        .facebook {
+          a {
+            svg {
+              .icon-bg {
+                fill: $wh;
+              }
+            }
+          }
+        }
+
+        .youtube {
+          a {
+            svg {
+              .icon-bg {
+                fill: $wh;
+              }
+            }
+          }
+        }
+
+        .ott {
+          div {
+            img {
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    background-color: $hdDark;
+    border-top: 1px solid $gr3;
+  }
+}
+
+@mixin themeLight {
+  color: $bk;
+  background-color: $wh;
+
+  header {
+    background-color: rgba($hdLight, 1);
+
+    &.float {
+      background-color: rgba($hdLight, 0.95); //? if alpha=1 add backdrop-filter: blur(0px);
+    }
+  }
+
+  header,
+  footer {
+    .container {
+      .link {
+        .myvideo {
+          a {
+            svg {
+              .icon-bg {
+                fill: $bk;
+              }
+            }
+          }
+        }
+
+        .facebook {
+          a {
+            svg {
+              .icon-bg {
+                fill: $bk;
+              }
+            }
+          }
+        }
+
+        .youtube {
+          a {
+            svg {
+              .icon-bg {
+                fill: $bk;
+              }
+            }
+          }
+        }
+
+        .ott {
+          div {
+            img {
+              right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    background-color: $hdLight;
+    border-top: 1px solid $gr9;
+  }
+}
+
+//Hint: @include themeCustom($themeC, $themeBg, $themeFlBg, $themeFtBg, url(../assets/images/logo.png));
+@mixin themeCustom($themeC, $themeBg, $themeFlBg, $themeFtBg) {
+  color: $themeC;
+  background-color: $themeBg;
+
+  header {
+    &.float {
+      background-color: $themeFlBg;
+    }
+  }
+
+  footer {
+    background-color: $themeFtBg;
+  }
+}
+
+//* Header
+header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: $headerZ;
+  position: fixed;
+  top: 0;
+  transition: all 0.2s ease;
+  &.float {
+    transition: all 0.2s ease;
+  }
+
+  @include pad {
+    height: 62px;
+  }
+
+  .container {
+    justify-content: space-between;
+
+    .link {
+      li {
+        a {
+          width: 24px;
+          height: 24px;
+
+          @include pad {
+            width: 32px;
+            height: 32px;
+          }
+        }
+      }
+
+      li:nth-child(2) {
+        margin-left: 16px;
+        margin-right: 16px;
+
+        @include pad {
+          margin-left: 20px;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
+
+header,
+footer {
+  .container {
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    margin: 0 auto;
+    @include pad {
+      padding: 0 30px;
+    }
+    .myv-logo {
+      width: 100px;
+
+      img,
+      svg {
+        width: 100%;
+      }
+
+      @include pad {
+        width: 140px;
+      }
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+
+      li {
+        a {
+          display: block;
+
+          svg {
+            width: 100%;
+
+            path,
+            polygon,
+            g {
+              transition: all 0.3s ease;
+            }
+          }
+
+          &:hover {
+            svg {
+              path,
+              polygon,
+              g {
+                transition: all 0.3s ease;
+              }
+            }
+          }
+        }
+      }
+
+      .myvideo {
+        a {
+          svg {
+            .icon-mask {
+              display: none;
+            }
+
+            .icon-icon {
+              display: none;
+            }
+          }
+        }
+
+        &:hover {
+          a {
+            svg {
+              .icon-bg {
+                fill: $og1;
+              }
+
+              .icon-mask {
+                display: block;
+              }
+
+              .icon-icon {
+                fill: $wh;
+                display: block;
+              }
+            }
+          }
+        }
+      }
+
+      .facebook {
+        a {
+          svg {
+            .icon-icon {
+              fill: transparent;
+            }
+          }
+        }
+
+        &:hover {
+          a {
+            svg {
+              .icon-bg {
+                fill: #1877f2;
+              }
+
+              .icon-icon {
+                fill: $wh;
+              }
+            }
+          }
+        }
+      }
+
+      .youtube {
+        a {
+          svg {
+            .icon-icon {
+              fill: transparent;
+            }
+          }
+        }
+
+        &:hover {
+          a {
+            svg {
+              .icon-bg {
+                fill: red;
+              }
+
+              .icon-icon {
+                fill: $wh;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//* Main Content
+.main-content {
+  padding-top: 0;
+  padding-bottom: 0;
+  text-align: center;
+  margin: 0 auto;
+}
+
+//* Footer
+footer {
+  text-align: center;
+  margin: 80px auto 0;
+  padding: 40px 0;
+
+  .container {
+    justify-content: space-between;
+
+    @include pad {
+      justify-content: space-around;
+    }
+
+    .link {
+      li {
+        margin-right: 10px;
+        @include sm {
+          margin-right: 12px;
+        }
+        @include pad {
+          margin-right: 16px;
+        }
+
+        img {
+          height: 100%;
+        }
+
+        a {
+          svg {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            @include pad {
+              width: 32px;
+              height: 32px;
+            }
+          }
+        }
+      }
+
+      li:last-child {
+        margin-right: 0;
+      }
+
+      .ott {
+        div {
+          width: 28px;
+          height: 35px;
+          object-fit: cover;
+          overflow: hidden;
+          position: relative;
+          @include sm {
+            width: 32px;
+            height: 40px;
+          }
+          @include pad {
+            width: 42px;
+            height: 51px;
+          }
+          img {
+            width: auto;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+          }
+        }
+      }
+
+      .appstore,
+      .googleplay {
+        a {
+          width: auto;
+          height: 24px;
+          display: flex;
+          border-radius: 90px;
+          transition: all 0.3s ease;
+
+          @include pad {
+            height: 32px;
+          }
+
+          img {
+            width: auto;
+            height: 100%;
+            border-radius: 90px;
+            object-fit: contain;
+          }
+
+          &:hover {
+            opacity: 0.85;
+            transition: all 0.3s ease;
+          }
+        }
+      }
+    }
+  }
+
+  .copyright {
+    width: 100%;
+    max-width: 1440px;
+    padding: 0 20px;
+    margin: 24px auto 0;
+    display: inline-block;
+    color: $gr6;
+    font-size: 13px;
+    text-align: left;
+    line-height: 1.2rem;
+
+    a {
+      color: $gr6;
+      &:hover {
+        color: $gr5;
+      }
+    }
+
+    @include pad {
+      text-align: center;
+    }
+
+    .ft-br {
+      display: block;
+
+      @include pad {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+//* Back To Top
+#top {
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+  text-align: center;
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  background-color: $topBg;
+  border: 2px solid $wh;
+  cursor: pointer;
+  z-index: $topZ;
+  display: none;
+
+  svg,
+  img {
+    width: 100%;
+  }
+
+  @include pad {
+    width: 48px;
+    height: 48px;
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+//* Button
+@mixin btn {
+  display: inline-block;
+  outline: none;
+  border: 0;
+  -webkit-appearance: none;
+  cursor: pointer;
+  border-radius: 50px;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  margin: auto;
+  box-sizing: border-box;
+  transition: all 0.2s;
+
+  &:hover {
+    transition: all 0.2s;
+  }
+}
+
+@mixin btnSizeL {
+  height: 36px;
+  line-height: 36px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 15px;
+
+  @include pad {
+    height: 45px;
+    line-height: 45px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @include xl {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+  }
+}
+
+@mixin btnSizeM {
+  height: 36px;
+  line-height: 36px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 15px;
+
+  @include pad {
+    height: 45px;
+    line-height: 45px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@mixin btnSizeCustom($btnSH, $btnSPd, $btnSFz, $btnMH, $btnMPd, $btnMFz, $btnLH, $btnLPd, $btnLFz) {
+  height: $btnSH;
+  line-height: $btnSH;
+  padding-left: $btnSPd;
+  padding-right: $btnSPd;
+  font-size: $btnSFz;
+
+  @include pad {
+    height: $btnMH;
+    line-height: $btnMH;
+    padding-left: $btnMPd;
+    padding-right: $btnMPd;
+    font-size: $btnMFz;
+  }
+
+  @include xl {
+    height: $btnLH;
+    line-height: $btnLH;
+    padding-left: $btnLPd;
+    padding-right: $btnLPd;
+    font-size: $btnLFz;
+  }
+}
+
+@mixin btnCustom($btnBg, $btnC, $btnBd, $btnHoverBg, $btnHoverBd) {
+  background-color: $btnBg;
+  border: 1px solid $btnBd;
+  color: $btnC;
+
+  &:hover {
+    border: 1px solid $btnHoverBd;
+    background-color: $btnHoverBg;
+  }
+}
+
+%btnOg {
+  background-color: $og1;
+  color: $wh;
+
+  &:hover {
+    background-color: $og2;
+  }
+}
+
+%btnHoverScale {
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+@mixin btnIconLeft($btnIcon, $btnIconW) {
+  &::before {
+    content: "";
+    width: $btnIconW;
+    height: $btnIconW;
+    background-image: $btnIcon;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin-right: 6px;
+  }
+}
+
+@mixin btnIconRight($btnIcon, $btnIconW) {
+  &::after {
+    content: "";
+    width: $btnIconW;
+    height: $btnIconW;
+    background-image: $btnIcon;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin-left: 6px;
+  }
+}
+
+//* Ribbon
+@mixin ribbon {
+  width: 48px;
+  background-color: $og1;
+  display: inline-block;
+  padding: 10px 0;
+  margin-bottom: 14px;
+  text-align: center;
+  background-color: $og1;
+  position: relative;
+
+  &::after {
+    content: "";
+    height: 0;
+    width: 0;
+    bottom: -14px;
+    left: 0;
+    position: absolute;
+    border-left: 24px solid $og1;
+    border-right: 24px solid $og1;
+    border-bottom: 14px solid transparent;
+  }
+}
+
+//* Notice
+@mixin notice($nTitle, $nLiC) {
+  .container {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 40px;
+    @include pad {
+      padding: 0 80px;
+    }
+    @include xl {
+      padding: 0px;
+    }
+    h3 {
+      border-left: 4px solid $nTitle;
+      line-height: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      color: $nTitle;
+      padding-left: 8px;
+      text-align: justify;
+      margin-bottom: 20px;
+      @include pad {
+        line-height: 35px;
+        font-size: 24px;
+        padding-left: 19px;
+        margin-left: 2px;
+      }
+    }
+
+    ul,
+    ol {
+      list-style-type: none;
+      text-align: justify;
+
+      li {
+        list-style-position: outside;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 20px;
+        color: $nLiC;
+        margin-top: 16px;
+        margin-left: 7px; //?marker width
+        padding-left: 12px;
+        position: relative;
+        @include pad {
+          font-size: 24px;
+          line-height: 35px;
+          margin-left: 11px;
+          padding-left: 16px;
+        }
+
+        a {
+          text-decoration: underline;
+          transition: 0.3s all ease-in;
+
+          &:hover {
+            opacity: 0.8;
+            transition: 0.3s all ease-in;
+          }
+        }
+        &::before {
+          content: "*";
+          position: absolute;
+          left: -7px;
+          @include pad {
+            left: -11px;
+          }
+        }
+        ul {
+          list-style-type: none;
+          counter-reset: counter;
+          li {
+            &::marker {
+              content: initial;
+            }
+          }
+        }
+      }
+    }
+  }
+}

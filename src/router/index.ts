@@ -17,7 +17,6 @@ import WildBirdUrbanBirds from '@/components/pages/WildBirdUrbanBirds.vue'
 import WildBirdQuiz from '@/components/pages/WildBirdQuiz.vue'
 import WildBirdCuteBirdDIY from '@/components/pages/WildBirdCuteBirdDIY.vue'
 import Home from '@/components/pages/Home.vue'
-import RouterLayout from '@/components/RouterLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

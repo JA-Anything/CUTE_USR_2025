@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, watch } from 'vue'
 import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 import Popup from './components/Popup.vue'
 import MenuPopup from './components/MenuPopup.vue'
@@ -124,31 +124,66 @@ const handleMenuClick = (item: any) => {
 <template>
   <header>
     <h1><RouterLink to="/">中國科技大學通識中心</RouterLink></h1>
-    <nav>
-      <ul>
-        <li v-for="(item, index) in headerMenu" :key="index">
-          <RouterLink v-if="item.path" :to="item.path">{{ item.label }}</RouterLink>
-          <a v-else href="#" @click.prevent="openMenuPopup(item.children)">{{ item.label }}</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="nav-map">
+      <nav>
+        <ul>
+          <li>
+            <a href="#" class="nav-wild-bird" @click.prevent="openMenuPopup(headerMenu[0].children)"
+              >台北鳥會野鳥救傷中心</a
+            >
+          </li>
+          <li>
+            <a href="#" class="nav-fuyang" @click.prevent="openMenuPopup(headerMenu[1].children)"
+              >富陽自然生態公園</a
+            >
+          </li>
+          <li>
+            <a href="#" class="nav-cute" @click.prevent="openMenuPopup(headerMenu[2].children)"
+              >中國科技大學</a
+            >
+          </li>
+          <li>
+            <a href="#" class="nav-temple" @click.prevent="openMenuPopup(headerMenu[3].children)"
+              >石泉巖清水祖師廟</a
+            >
+          </li>
+          <li>
+            <a href="#" class="nav-dawo" @click.prevent="openMenuPopup(headerMenu[4].children)"
+              >大我新舍</a
+            >
+          </li>
+          <li>
+            <a href="#" class="nav-lihe" @click.prevent="openMenuPopup(headerMenu[5].children)"
+              >黎和生態公園</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
+  <!-- <main>
     <RouterView />
-  </main>
+  </main> -->
 
   <footer>
-    <p>Copyright&copy; 2024 中國科技大學通識中心</p>
     <nav>
       <ul>
-        <li v-for="(item, index) in footerMenu" :key="index">
-          <RouterLink :to="item.path">{{ item.label }}</RouterLink>
+        <li>
+          <RouterLink class="footer-link-1" :to="footerMenu[0].path">隱私權政策</RouterLink>
+        </li>
+        <li>
+          <RouterLink class="footer-link-2" :to="footerMenu[1].path">使用者條款</RouterLink>
+        </li>
+        <li>
+          <RouterLink class="footer-link-3" :to="footerMenu[2].path">免責聲明</RouterLink>
         </li>
       </ul>
     </nav>
+    <p>Copyright&copy; 2024-<span id="current-year"></span> 中國科技大學通識中心</p>
   </footer>
 
+  <!-- 顯示 header 的多層級選單 popup -->
   <MenuPopup
     v-if="isMenuPopupVisible"
     :menuItems="menuItems"
@@ -158,75 +193,8 @@ const handleMenuClick = (item: any) => {
     @go-back="goToPreviousMenu"
   />
 
+  <!-- 顯示內容元件的 popup (Dialog) -->
   <Popup :component-name="currentPopupComponent" />
 </template>
 
-<style scoped>
-/* 這裡可以放 App.vue 的專屬樣式，例如 header 和 footer */
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-header h1 a {
-  color: #fff;
-  text-decoration: none;
-}
-
-header nav ul,
-footer nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 1.5rem;
-}
-
-header nav a,
-footer nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-header nav a:hover,
-footer nav a:hover {
-  color: #f0f0f0;
-}
-
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem 2rem;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-}
-
-footer p {
-  margin: 0;
-}
-
-footer nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-footer nav li a {
-  color: #fff;
-  text-decoration: none;
-}
-</style>
+<style scoped lang="scss"></style>

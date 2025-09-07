@@ -1,0 +1,106 @@
+//* Nav
+nav{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    position: fixed;
+    top: -10px;
+    left: 0;
+    z-index: 850;
+    background: $gr1;
+    transition: top .3s ease-in;
+    &.sticky{
+        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 50px;
+        transition: top .5s ease-in;
+        @include pad{
+            top: 60px;
+        }
+    }
+    div{
+        width: 100%;
+        height: 39px;
+        max-width: 1440px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: flex;
+        margin: auto;
+        justify-content: center;
+        @include pad{
+            height: 45+16px;
+        }
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: transparent;
+            border-radius: 0;
+        }
+        ul{
+            width: 100%;
+            display: flex;
+            margin: auto;
+            padding: 0 40px;
+            @include md{
+                justify-content: center;
+            }
+            li{
+                width: 80px;
+                height: 36px;
+                text-align: center;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                @include pad{
+                    width: 174px;
+                    height: 45px;
+                    &:hover{
+                        a{
+                            color: $gold1;
+                        }
+                    }
+                }
+                &.active{
+                    &:after{
+                        content: '';
+                        width: 100%;
+                        position: absolute;
+                        border-bottom: 2px solid $wh;
+                        bottom: -2px;
+                        @include pad{
+                            border-bottom: 4px solid $wh;
+                            bottom: -7px;
+                        }
+                    }
+                    a{
+                        color: rgba($wh, 1);
+                    }
+                }
+                a{
+                    width: 80px;
+                    font-weight: 700;
+                    font-size: 14px;
+                    line-height: 19px;
+                    letter-spacing: -0.05em;
+                    color: rgba($wh, 0.8);
+                    text-align: center;
+                    display: flex;
+                    justify-content: center;
+                    transition: all .3s ease-in;
+                    @include pad{
+                        width: 174px;
+                        font-size: 24px;
+                        line-height: 32px;
+                    }
+                }
+            }
+        }
+    }
+}
