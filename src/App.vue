@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Ref, watch } from 'vue'
+import { type Ref, watch, ref } from 'vue' // <-- 這裡已新增 ref
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import Popup from './components/Popup.vue'
 import MenuPopup from './components/MenuPopup.vue'
