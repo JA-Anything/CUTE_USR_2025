@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import '_base.scss';
+@use 'base.scss' as base;
 // 全域樣式設定
 html,
 body {
