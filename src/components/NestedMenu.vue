@@ -50,7 +50,7 @@ const toggleExpand = (item: any, index: number) => {
         <!-- 這裡不再需要處理 handleChildClick，因為父元件會直接接收事件 -->
         <NestedMenu
           :items="item.children"
-          @menu-item-click="(childItem) => emits('menu-item-click', childItem)"
+          @menu-item-click="(childItem: any) => emits('menu-item-click', childItem)"
         />
       </ul>
     </li>

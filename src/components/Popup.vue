@@ -10,7 +10,7 @@ const currentComponent = shallowRef<Component | null>(null)
 const isLoading = ref(false)
 
 // 定義一個包含所有動態元件的對象，並使用前綴來區分單元
-const componentMap = {
+const componentMap: Record<string, Component> = {
   // 台北鳥會野鳥救傷中心
   WildBirdUrbanBirds: defineAsyncComponent(
     () => import('@/components/pages/WildBirdUrbanBirds.vue'),
@@ -61,15 +61,19 @@ const componentMap = {
   Privacy: defineAsyncComponent(() => import('@/components/pages/Privacy.vue')),
   Terms: defineAsyncComponent(() => import('@/components/pages/Terms.vue')),
   Disclaimer: defineAsyncComponent(() => import('@/components/pages/Disclaimer.vue')),
-} as Record<string, Component>
+}
 
 // 根據傳入的 componentName 載入對應的元件
 watch(
   () => route.name,
-  (newComponentName) => {
-    if (newComponentName && componentMap[newComponentName as string]) {
+  (newComponentName: string | symbol | null) => {
+    if (
+      newComponentName &&
+      typeof newComponentName === 'string' &&
+      componentMap[newComponentName]
+    ) {
       isLoading.value = true
-      currentComponent.value = componentMap[newComponentName as string]
+      currentComponent.value = componentMap[newComponentName]
 
       setTimeout(() => {
         isLoading.value = false

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, watch, type Ref } from 'vue'
-import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
+import { type Ref, watch } from 'vue'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
 import Popup from './components/Popup.vue'
 import MenuPopup from './components/MenuPopup.vue'
 
@@ -86,7 +86,7 @@ const menuHistory: Ref<MenuItem[][]> = ref([])
 // 監聽路由變化，決定是否顯示 popup
 watch(
   () => route.name,
-  (newName: string | symbol | null) => {
+  (newName) => {
     // 檢查路由名稱是否應顯示在 popup 中 (所有非 'home' 的路由)
     if (newName && newName !== 'home') {
       currentPopupComponent.value = newName as string
