@@ -1,0 +1,1 @@
+import{_ as o,c as s,o as a,a as t}from"./index-C6se3r4H.js";const n={},c={class:"content-page"};function r(_,e){return a(),s("div",c,[...e[0]||(e[0]=[t("h2",null,"黎和生態公園",-1),t("p",null,"黎和生態公園以其獨特的濕地生態而聞名，是觀察水生植物和候鳥的絕佳地點。",-1)])])}const l=o(n,[["render",r],["__scopeId","data-v-781a5dd3"]]);export{l as default};
