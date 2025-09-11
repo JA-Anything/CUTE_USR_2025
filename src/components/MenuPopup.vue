@@ -56,6 +56,7 @@ const goBack = () => {
   align-items: center;
   z-index: 1000;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 .menu-popup-content {

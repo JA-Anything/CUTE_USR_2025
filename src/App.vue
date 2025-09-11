@@ -119,46 +119,56 @@ const handleMenuClick = (item: any) => {
     menuItems.value = item.children
   }
 }
+
+// 地圖預設置中
+window.addEventListener('load', () => {
+  // 取得容器和內容元素，並加上明確的型別註解
+  const scrollContainer: HTMLDivElement | null = document.querySelector('.map-wrap')
+  const contentElement: HTMLDivElement | null = document.querySelector('.nav-map')
+
+  // 進行型別守衛（Type Guard），確保元素存在
+  if (scrollContainer && contentElement) {
+    // 計算內容和容器之間的寬度差異
+    const contentWidth: number = contentElement.offsetWidth
+    const containerWidth: number = scrollContainer.offsetWidth
+
+    // 計算置中的捲動位置
+    const scrollToPosition: number = (contentWidth - containerWidth) / 2
+
+    // 調整容器的水平捲軸位置
+    scrollContainer.scrollLeft = scrollToPosition
+  }
+})
 </script>
 
 <template>
   <header>
-    <h1><RouterLink to="/">中國科技大學通識中心</RouterLink></h1>
-    <div class="nav-map">
-      <nav>
-        <ul>
-          <li>
-            <a href="#" class="nav-wild-bird" @click.prevent="openMenuPopup(headerMenu[0].children)"
-              >台北鳥會野鳥救傷中心</a
-            >
-          </li>
-          <li>
-            <a href="#" class="nav-fuyang" @click.prevent="openMenuPopup(headerMenu[1].children)"
-              >富陽自然生態公園</a
-            >
-          </li>
-          <li>
-            <a href="#" class="nav-cute" @click.prevent="openMenuPopup(headerMenu[2].children)"
-              >中國科技大學</a
-            >
-          </li>
-          <li>
-            <a href="#" class="nav-temple" @click.prevent="openMenuPopup(headerMenu[3].children)"
-              >石泉巖清水祖師廟</a
-            >
-          </li>
-          <li>
-            <a href="#" class="nav-dawo" @click.prevent="openMenuPopup(headerMenu[4].children)"
-              >大我新舍</a
-            >
-          </li>
-          <li>
-            <a href="#" class="nav-lihe" @click.prevent="openMenuPopup(headerMenu[5].children)"
-              >黎和生態公園</a
-            >
-          </li>
-        </ul>
-      </nav>
+    <h1><RouterLink to="/">翱．生態-共善六張犁</RouterLink></h1>
+    <div class="map-wrap">
+      <div class="nav-map">
+        <nav>
+          <ul>
+            <li>
+              <a href="#" class="nav-wild-bird top" @click.prevent="openMenuPopup(headerMenu[0].children)">台北鳥會野鳥救傷中心</a>
+            </li>
+            <li>
+              <a href="#" class="nav-fuyang top" @click.prevent="openMenuPopup(headerMenu[1].children)">富陽自然生態公園</a>
+            </li>
+            <li>
+              <a href="#" class="nav-cute top" @click.prevent="openMenuPopup(headerMenu[2].children)">中國科技大學</a>
+            </li>
+            <li>
+              <a href="#" class="nav-temple bottom" @click.prevent="openMenuPopup(headerMenu[3].children)">石泉巖清水祖師廟</a>
+            </li>
+            <li>
+              <a href="#" class="nav-dawo right" @click.prevent="openMenuPopup(headerMenu[4].children)">大我新舍</a>
+            </li>
+            <li>
+              <a href="#" class="nav-lihe left" @click.prevent="openMenuPopup(headerMenu[5].children)">黎和生態公園</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -180,18 +190,15 @@ const handleMenuClick = (item: any) => {
         </li>
       </ul>
     </nav>
-    <p>Copyright&copy; 2024-<span id="current-year"></span> 中國科技大學通識中心</p>
+    <p>
+      Copyright&copy; 2024-
+      <span id="current-year"></span>
+      中國科技大學通識中心
+    </p>
   </footer>
 
   <!-- 顯示 header 的多層級選單 popup -->
-  <MenuPopup
-    v-if="isMenuPopupVisible"
-    :menuItems="menuItems"
-    :has-history="menuHistory.length > 1"
-    @close="closeMenuPopup"
-    @menu-click="handleMenuClick"
-    @go-back="goToPreviousMenu"
-  />
+  <MenuPopup v-if="isMenuPopupVisible" :menuItems="menuItems" :has-history="menuHistory.length > 1" @close="closeMenuPopup" @menu-click="handleMenuClick" @go-back="goToPreviousMenu" />
 
   <!-- 顯示內容元件的 popup (Dialog) -->
   <Popup :component-name="currentPopupComponent" />
