@@ -1,0 +1,1 @@
+import{_ as o,c as s,o as a,a as t}from"./index-D1z10sub.js";const c={},n={class:"content-page"};function r(d,e){return a(),s("div",n,[...e[0]||(e[0]=[t("h2",null,"台北鳥會野鳥救傷中心 萌鳥DIY",-1),t("p",null,"透過動手創作，一起來認識野鳥的可愛之處吧！本單元提供多樣化的萌鳥DIY教學，讓您在創作的過程中，更加貼近野鳥的世界，並發揮無限創意。",-1)])])}const l=o(c,[["render",r],["__scopeId","data-v-832c50a3"]]);export{l as default};

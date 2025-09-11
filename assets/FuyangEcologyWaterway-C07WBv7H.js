@@ -1,0 +1,1 @@
+import{_ as t,c as a,o as n,a as o}from"./index-D1z10sub.js";const s={},c={class:"content-page"};function r(_,e){return n(),a("div",c,[...e[0]||(e[0]=[o("h2",null,"富陽自然生態公園 生態水道區",-1),o("p",null,"生態水道是富陽公園的生命之源，蜿蜒的水道滋養了豐富的動植物生態。漫步於此，您可以觀察到魚兒悠游、蜻蜓點水，感受水與生態交織出的美好景致。",-1)])])}const d=t(s,[["render",r],["__scopeId","data-v-03915199"]]);export{d as default};

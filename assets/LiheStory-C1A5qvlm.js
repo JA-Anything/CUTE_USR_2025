@@ -1,0 +1,1 @@
+import{_ as o,c as s,o as n,a as t}from"./index-D1z10sub.js";const a={},c={class:"content-page"};function r(_,e){return n(),s("div",c,[...e[0]||(e[0]=[t("h2",null,"黎和生態公園 黎和故事",-1),t("p",null,"黎和生態公園的每片土地都蘊藏著豐富的故事。本頁面將為您揭開公園背後的神祕面紗，從歷史演變到生態復育，帶您了解黎和公園如何從一座荒廢的營區，轉變成今日的生態綠洲。",-1)])])}const l=o(a,[["render",r],["__scopeId","data-v-460269d8"]]);export{l as default};
