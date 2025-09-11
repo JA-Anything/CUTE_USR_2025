@@ -12,9 +12,10 @@
     }
   ],
   "compilerOptions": {
-    "module": "NodeNext",
-    "types": ["vite/client", "vue/macros-global"],
-    "isolatedModules": false,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": ["vite/client"],
+    "isolatedModules": true,
     "skipLibCheck": true
   }
 }

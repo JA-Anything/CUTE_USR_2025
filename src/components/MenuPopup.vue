@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
 import NestedMenu from './NestedMenu.vue'
-
-const router = useRouter()
+import type { MenuItem } from '@/types'
 
 const props = defineProps<{
-  menuItems: any[]
+  menuItems: MenuItem[] // 將 any[] 改為 MenuItem[]
   hasHistory: boolean
 }>()
 
@@ -16,7 +14,8 @@ const closePopup = () => {
 }
 
 // 這個函式會接收到來自 NestedMenu 的點擊事件
-const handleMenuClick = (item: any) => {
+const handleMenuClick = (item: MenuItem) => {
+  // 將 any 改為 MenuItem
   emits('menu-click', item)
 }
 

@@ -66,7 +66,7 @@ const componentMap: Record<string, Component> = {
 // 根據傳入的 componentName 載入對應的元件
 watch(
   () => route.name,
-  (newComponentName: string | symbol | null) => {
+  (newComponentName) => {
     if (
       newComponentName &&
       typeof newComponentName === 'string' &&
