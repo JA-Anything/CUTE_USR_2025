@@ -252,11 +252,9 @@ window.addEventListener('load', () => {
       </ul>
     </nav>
     <p>
-      <<<<<<< HEAD Copyright&copy; 2024-
-      <span>{{ currentYear }}</span>
-      中國科技大學通識中心 ======= Copyright&copy; 2024-
+      Copyright&copy; &nbsp;2024 -
       <span id="current-year"></span>
-      中國科技大學通識中心 >>>>>>> test-build
+      &nbsp;中國科技大學通識中心
     </p>
   </footer>
 
