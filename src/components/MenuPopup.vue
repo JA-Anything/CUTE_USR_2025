@@ -71,7 +71,7 @@ const goBack = () => {
 
 .popup-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 0 0 10px 0;
   border-bottom: 1px solid #eee;
