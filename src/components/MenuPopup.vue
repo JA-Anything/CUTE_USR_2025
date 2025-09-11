@@ -51,6 +51,7 @@ const goBack = () => {
   align-items: center;
   z-index: 1000;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 .menu-popup-content {
@@ -66,7 +67,7 @@ const goBack = () => {
 
 .popup-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 0 0 10px 0;
   border-bottom: 1px solid #eee;

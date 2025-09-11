@@ -36,16 +36,19 @@ body {
   flex-direction: column;
   height: 100%;
 }
-header {
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
   padding: 1rem 2rem;
-
-  h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+header {
+  .map-wrap {
+    position: relative;
+    overflow-x: scroll;
   }
   .nav-map {
     background-image: url(@/assets/images/nav-map.png);
@@ -53,11 +56,13 @@ header {
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
+    min-width: 1460px;
     height: 100vh;
     position: relative;
     nav {
       a {
         position: absolute;
+        z-index: 0;
         font-weight: bold;
         background-color: #fff;
         color: #328275;
@@ -65,9 +70,44 @@ header {
         border-radius: 8px;
         box-shadow: 0 4px 16px rgb(0 0 0 / 12%);
         transition: color 0.3s ease;
+        &::after {
+          content: '';
+          position: absolute;
+          z-index: -1;
+          width: 24px;
+          height: 24px;
+          background-color: #fff;
+        }
         &:hover {
           background-color: #328275;
           color: #fff;
+          &::after {
+            background-color: #328275;
+          }
+        }
+        &.top::after {
+          bottom: -10px;
+          left: 50%;
+          transform: rotate(45deg) translateX(-50%);
+          transform-origin: left;
+        }
+        &.bottom::after {
+          top: -10px;
+          left: 50%;
+          transform: rotate(45deg) translateX(-50%);
+          transform-origin: left;
+        }
+        &.left::after {
+          right: -10px;
+          top: 50%;
+          transform: rotate(45deg) translateY(-50%);
+          transform-origin: top;
+        }
+        &.right::after {
+          left: -10px;
+          top: 50%;
+          transform: rotate(45deg) translateY(-50%);
+          transform-origin: top;
         }
       }
       a {

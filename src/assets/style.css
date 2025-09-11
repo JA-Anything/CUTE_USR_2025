@@ -45,16 +45,19 @@ body {
   height: 100%;
 }
 
-header {
-  padding: 1rem 2rem;
-}
-header h1 {
+h1 {
   margin: 0;
   font-size: 1.5rem;
+  padding: 1rem 2rem;
 }
-header h1 a {
+h1 a {
   color: inherit;
   text-decoration: none;
+}
+
+header .map-wrap {
+  position: relative;
+  overflow-x: scroll;
 }
 header .nav-map {
   background-image: url(@/assets/images/nav-map.png);
@@ -62,11 +65,13 @@ header .nav-map {
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
+  min-width: 1460px;
   height: 100vh;
   position: relative;
 }
 header .nav-map nav a {
   position: absolute;
+  z-index: 0;
   font-weight: bold;
   background-color: #fff;
   color: #328275;
@@ -77,9 +82,52 @@ header .nav-map nav a {
   -webkit-transition: color 0.3s ease;
   transition: color 0.3s ease;
 }
+header .nav-map nav a::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+}
 header .nav-map nav a:hover {
   background-color: #328275;
   color: #fff;
+}
+header .nav-map nav a:hover::after {
+  background-color: #328275;
+}
+header .nav-map nav a.top::after {
+  bottom: -10px;
+  left: 50%;
+  -webkit-transform: rotate(45deg) translateX(-50%);
+          transform: rotate(45deg) translateX(-50%);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+header .nav-map nav a.bottom::after {
+  top: -10px;
+  left: 50%;
+  -webkit-transform: rotate(45deg) translateX(-50%);
+          transform: rotate(45deg) translateX(-50%);
+  -webkit-transform-origin: left;
+          transform-origin: left;
+}
+header .nav-map nav a.left::after {
+  right: -10px;
+  top: 50%;
+  -webkit-transform: rotate(45deg) translateY(-50%);
+          transform: rotate(45deg) translateY(-50%);
+  -webkit-transform-origin: top;
+          transform-origin: top;
+}
+header .nav-map nav a.right::after {
+  left: -10px;
+  top: 50%;
+  -webkit-transform: rotate(45deg) translateY(-50%);
+          transform: rotate(45deg) translateY(-50%);
+  -webkit-transform-origin: top;
+          transform-origin: top;
 }
 header .nav-map nav a.nav-wild-bird {
   right: 29%;
