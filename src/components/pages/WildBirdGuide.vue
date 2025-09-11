@@ -9,16 +9,4 @@
 .content-page {
   text-align: left;
 }
-
-.content-page h2 {
-  font-size: 2rem;
-  color: #007bff;
-  margin-bottom: 1rem;
-}
-
-.content-page p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #555;
-}
 </style>
