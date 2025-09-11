@@ -1,28 +1,22 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from 'vue'
-import { useRouter } from 'vue-router'
+import type { MenuItem } from '@/types'
 
-const router = useRouter()
-
-// 定義組件 props 和 emits
-const props = defineProps<{
-  items: any[]
+defineProps<{
+  items: MenuItem[] // 將 any[] 改為 MenuItem[]
 }>()
 
 const emits = defineEmits(['menu-item-click'])
 
-// 使用 ref 來追蹤每個子選單的展開狀態
 const expandedItems = ref<{ [key: string]: boolean }>({})
 
-// 遞迴呼叫自身元件
 const NestedMenu = defineAsyncComponent(() => import('./NestedMenu.vue'))
 
-const toggleExpand = (item: any, index: number) => {
+const toggleExpand = (item: MenuItem) => {
+  // 將 any 改為 MenuItem
   if (item.children) {
-    const itemId = item.label + index
-    expandedItems.value[itemId] = !expandedItems.value[itemId]
+    expandedItems.value[item.id] = !expandedItems.value[item.id]
   } else {
-    // 點擊最底層的項目時，發出事件給父元件處理
     emits('menu-item-click', item)
   }
 }
@@ -30,27 +24,26 @@ const toggleExpand = (item: any, index: number) => {
 
 <template>
   <ul class="nested-menu-list">
-    <li v-for="(item, index) in items" :key="index">
-      <div class="menu-item-wrapper" @click.prevent="toggleExpand(item, index)">
+    <li v-for="item in items" :key="item.id">
+      <div class="menu-item-wrapper" @click.prevent="toggleExpand(item)">
         <a
           href="#"
           :class="{
             'menu-item-link': !item.children,
             'menu-parent-link': item.children,
-            expanded: item.children && expandedItems[item.label + index],
+            expanded: item.children && expandedItems[item.id],
           }"
         >
           {{ item.label }}
           <span v-if="item.children" class="arrow-icon">{{
-            expandedItems[item.label + index] ? '&#x25B2;' : '&#x25BC;'
+            expandedItems[item.id] ? '&#x25B2;' : '&#x25BC;'
           }}</span>
         </a>
       </div>
-      <ul v-if="item.children && expandedItems[item.label + index]" class="submenu-list">
-        <!-- 這裡不再需要處理 handleChildClick，因為父元件會直接接收事件 -->
+      <ul v-if="item.children && expandedItems[item.id]" class="submenu-list">
         <NestedMenu
           :items="item.children"
-          @menu-item-click="(childItem: any) => emits('menu-item-click', childItem)"
+          @menu-item-click="(childItem: MenuItem) => emits('menu-item-click', childItem)"
         />
       </ul>
     </li>
