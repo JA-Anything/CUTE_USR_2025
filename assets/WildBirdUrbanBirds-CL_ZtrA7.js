@@ -1,0 +1,1 @@
+import{_ as t,c,o as n,a as s}from"./index-t4m14ojT.js";const o={},a={class:"content-page"};function r(d,e){return n(),c("div",a,[...e[0]||(e[0]=[s("h2",null,"台北鳥會野鳥救傷中心 城市常見野鳥",-1),s("p",null,"您曾注意過在城市中飛翔的鳥兒嗎？本中心致力於推廣城市野鳥知識，介紹常見鳥種的習性與生態，讓您在繁忙的都市生活中也能與自然親密接觸，共同守護這些可愛的鄰居。",-1)])])}const l=t(o,[["render",r],["__scopeId","data-v-c915916c"]]);export{l as default};

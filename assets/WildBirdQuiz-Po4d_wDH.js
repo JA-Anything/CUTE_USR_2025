@@ -1,0 +1,1 @@
+import{_ as o,c as s,o as n,a as t}from"./index-t4m14ojT.js";const a={},c={class:"content-page"};function r(d,e){return n(),s("div",c,[...e[0]||(e[0]=[t("h2",null,"台北鳥會野鳥救傷中心 野鳥知識大挑戰",-1),t("p",null,"想測試自己對野鳥的了解程度嗎？歡迎挑戰「野鳥知識大挑戰」，透過有趣的互動問答，學習更多關於鳥類的小知識，成為野鳥小達人！",-1)])])}const l=o(a,[["render",r],["__scopeId","data-v-6538262d"]]);export{l as default};

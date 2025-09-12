@@ -1,0 +1,1 @@
+import{_ as a,c as o,o as s,a as t}from"./index-t4m14ojT.js";const n={},c={class:"content-page"};function r(_,e){return s(),o("div",c,[...e[0]||(e[0]=[t("h2",null,"大我新舍 老兵的故事",-1),t("p",null,"大我新舍承載著一代老兵的歲月記憶。本單元透過深度訪談與文字紀錄，讓您聆聽老兵們的生命故事與心路歷程，感受他們在大我新舍所留下的深刻印記。",-1)])])}const d=a(n,[["render",r],["__scopeId","data-v-5aa84768"]]);export{d as default};
