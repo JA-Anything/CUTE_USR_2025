@@ -1,1 +1,0 @@
-import{_ as o,c as a,o as s,a as t}from"./index-D1z10sub.js";const n={},c={class:"content-page"};function r(l,e){return s(),a("div",c,[...e[0]||(e[0]=[t("h2",null,"石泉巖清水祖師廟 文化巡禮",-1),t("p",null,"石泉巖清水祖師廟不僅是信仰中心，更是歷史與文化的縮影。本頁面帶您深入探索廟宇的建築特色、歷史淵源與獨特的文化習俗，體驗一場豐富的心靈巡禮。",-1)])])}const d=o(n,[["render",r],["__scopeId","data-v-d127ae1d"]]);export{d as default};

@@ -1,1 +1,0 @@
-import{_ as t,c as s,o as c,a}from"./index-D1z10sub.js";const n={},o={class:"content-page"};function r(_,e){return c(),s("div",o,[...e[0]||(e[0]=[a("h2",null,"富陽自然生態公園 戀戀蟬聲休憩區",-1),a("p",null,"夏季來臨，蟬鳴在富陽公園的樹林間此起彼落。戀戀蟬聲休憩區提供一個寧靜的空間，讓您在悠揚的蟬聲中放鬆身心，享受大自然的寧靜與和諧。",-1)])])}const l=t(n,[["render",r],["__scopeId","data-v-248b15bc"]]);export{l as default};

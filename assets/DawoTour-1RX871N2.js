@@ -1,1 +1,0 @@
-import{_ as t,c as s,o as a,a as o}from"./index-D1z10sub.js";const n={},c={class:"content-page"};function r(_,e){return a(),s("div",c,[...e[0]||(e[0]=[o("h2",null,"大我新舍 大我巡禮",-1),o("p",null,"大我新舍不僅是居住空間，更是充滿歷史的文化場域。本頁面將帶領您進行一場虛擬巡禮，探索眷村獨有的建築風格、社區風貌與生活軌跡，重現當年的時光記憶。",-1)])])}const d=t(n,[["render",r],["__scopeId","data-v-9182981f"]]);export{d as default};

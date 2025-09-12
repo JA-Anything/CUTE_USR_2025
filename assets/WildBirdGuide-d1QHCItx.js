@@ -1,1 +1,0 @@
-import{_ as o,c as s,o as a,a as t}from"./index-D1z10sub.js";const n={},c={class:"content-page"};function d(r,e){return a(),s("div",c,[...e[0]||(e[0]=[t("h2",null,"台北鳥會野鳥救傷中心 野鳥救傷初步指引",-1),t("p",null,"當您發現需要幫助的落巢幼鳥或受傷野鳥時該怎麼辦？本指引提供詳細的野鳥救傷SOP，教導您如何正確評估與處置，讓您在黃金時間內提供最適切的協助。",-1)])])}const l=o(n,[["render",d],["__scopeId","data-v-1ad3f4d8"]]);export{l as default};

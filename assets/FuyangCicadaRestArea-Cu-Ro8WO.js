@@ -1,1 +1,0 @@
-import{_ as t,c as s,o as n,a}from"./index-C6se3r4H.js";const o={},c={class:"content-page"};function r(_,e){return n(),s("div",c,[...e[0]||(e[0]=[a("h2",null,"富陽自然生態公園",-1),a("p",null,"富陽自然生態公園是一個城市中的綠洲，擁有豐富的自然生態和歷史遺跡，是市民休閒的好去處。",-1)])])}const l=t(o,[["render",r],["__scopeId","data-v-52147122"]]);export{l as default};
