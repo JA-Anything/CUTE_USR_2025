@@ -25,7 +25,7 @@ const toggleExpand = (item: MenuItem) => {
 <template>
   <ul class="nested-menu-list">
     <li v-for="item in items" :key="item.id">
-      <div class="menu-item-wrapper" :class="[{ 'menu-item-positioned': item.position }, item.id ? `menu-item-${item.id}` : '']" @click.prevent="toggleExpand(item)">
+      <div class="menu-item-wrapper" :class="[{ 'menu-item-positioned': item.id?.startsWith('fuyang-') }, item.id ? `menu-item-${item.id}` : '']" @click.prevent="toggleExpand(item)">
         <a
           href="#"
           :class="{
