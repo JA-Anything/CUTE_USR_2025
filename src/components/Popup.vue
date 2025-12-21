@@ -47,11 +47,7 @@ const componentMap: Record<string, Component> = {
 watch(
   () => route.name,
   (newComponentName) => {
-    if (
-      newComponentName &&
-      typeof newComponentName === 'string' &&
-      componentMap[newComponentName]
-    ) {
+    if (newComponentName && typeof newComponentName === 'string' && componentMap[newComponentName]) {
       isLoading.value = true
       currentComponent.value = componentMap[newComponentName]
 
@@ -140,7 +136,7 @@ const closePopup = () => {
 .popup-body {
   flex-grow: 1;
   width: 100%;
-  padding: 2rem;
+  padding: 1rem;
   box-sizing: border-box;
   overflow-y: auto;
 }

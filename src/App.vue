@@ -52,10 +52,6 @@ const headerMenu: MenuItem[] = [
         name: 'FuyangWetlandObservation',
         path: '/fuyang/wetland-observation',
         image: '/src/assets/images/fuyang-wetland-observation.png',
-        position: {
-          top: '20%',
-          left: '10%',
-        },
       },
       {
         id: 'fuyang-cicada',
@@ -63,10 +59,6 @@ const headerMenu: MenuItem[] = [
         name: 'FuyangCicadaRestArea',
         path: '/fuyang/cicada-rest-area',
         image: '/src/assets/images/fuyang-cicada-rest-area.png',
-        position: {
-          top: '20%',
-          right: '10%',
-        },
       },
       {
         id: 'fuyang-waterway',
@@ -74,10 +66,6 @@ const headerMenu: MenuItem[] = [
         name: 'FuyangEcologyWaterway',
         path: '/fuyang/ecology-waterway',
         image: '/src/assets/images/fuyang-ecology-waterway.png',
-        position: {
-          bottom: '15%',
-          left: '50%',
-        },
       },
     ],
   },

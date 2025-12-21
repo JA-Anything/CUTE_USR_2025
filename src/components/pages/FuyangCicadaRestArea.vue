@@ -84,7 +84,7 @@ const images = [
 }
 
 .cicada-rest-area {
-  padding: 20px;
+  padding: 0;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -180,10 +180,14 @@ const images = [
 .main-swiper :deep(.swiper-button-prev) {
   color: white;
   background: rgba(44, 95, 45, 0.7);
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-swiper :deep(.swiper-button-next):hover,
@@ -194,8 +198,15 @@ const images = [
 
 .main-swiper :deep(.swiper-button-next::after),
 .main-swiper :deep(.swiper-button-prev::after) {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
+}
+
+/* SVG Icon Size Control */
+.main-swiper :deep(.swiper-button-next svg),
+.main-swiper :deep(.swiper-button-prev svg) {
+  width: 20px;
+  height: 20px;
 }
 
 /* Responsive Design */
