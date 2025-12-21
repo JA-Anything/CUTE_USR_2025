@@ -5,6 +5,7 @@ import type { MenuItem } from '@/types'
 const props = defineProps<{
   menuItems: MenuItem[] // 將 any[] 改為 MenuItem[]
   hasHistory: boolean
+  menuId?: string // 用來識別是哪個選單
 }>()
 
 const emits = defineEmits(['close', 'menu-click', 'go-back'])
@@ -26,7 +27,7 @@ const goBack = () => {
 
 <template>
   <div class="popup-overlay" @click.self="closePopup">
-    <div class="menu-popup-content">
+    <div class="menu-popup-content" :class="{ 'fuyang-menu': props.menuId === 'fuyang-park' }">
       <div class="popup-header">
         <button v-if="props.hasHistory" class="back-button" @click="goBack">&lt; 回上一頁</button>
         <button class="close-button" @click="closePopup">&times;</button>
@@ -58,8 +59,9 @@ const goBack = () => {
   background-color: #fff;
   padding: 2rem;
   border-radius: 12px;
-  max-width: 500px;
+  max-width: 900px;
   width: 100%;
+  box-sizing: border-box;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   position: relative;
   animation: fadeIn 0.3s ease-out;
@@ -106,6 +108,19 @@ const goBack = () => {
   padding: 0;
   margin: 0;
   text-align: left;
+}
+
+/* 富陽選單的 menu-list 需要有高度才能讓 absolute 定位的子元素正確對位 */
+.fuyang-menu .menu-list {
+  position: relative;
+  min-height: 320px; /* 基礎高度 */
+  height: 100%; /* 填滿父容器 */
+}
+
+@media (min-width: 768px) {
+  .fuyang-menu .menu-list {
+    min-height: 560px; /* 大螢幕時增加高度 */
+  }
 }
 
 .menu-list li {
@@ -164,5 +179,37 @@ const goBack = () => {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* 富陽自然生態公園選單特殊樣式 */
+.fuyang-menu {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url('@/assets/images/fuyang.png');
+  background-size: 95%;
+  background-position: center 70%;
+  background-repeat: no-repeat;
+}
+
+/* 為富陽選單添加半透明遮罩以提高文字可讀性 */
+.fuyang-menu::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  z-index: 0;
+}
+
+/* 確保內容在遮罩之上 */
+.fuyang-menu .popup-header,
+.fuyang-menu .menu-list {
+  position: relative;
+  z-index: 1;
 }
 </style>

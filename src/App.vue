@@ -51,18 +51,33 @@ const headerMenu: MenuItem[] = [
         label: '濕地生態觀察區',
         name: 'FuyangWetlandObservation',
         path: '/fuyang/wetland-observation',
+        image: '/src/assets/images/fuyang-wetland-observation.png',
+        position: {
+          top: '20%',
+          left: '10%',
+        },
       },
       {
         id: 'fuyang-cicada',
         label: '戀戀蟬聲休憩區',
         name: 'FuyangCicadaRestArea',
         path: '/fuyang/cicada-rest-area',
+        image: '/src/assets/images/fuyang-cicada-rest-area.png',
+        position: {
+          top: '20%',
+          right: '10%',
+        },
       },
       {
         id: 'fuyang-waterway',
         label: '生態水道區',
         name: 'FuyangEcologyWaterway',
         path: '/fuyang/ecology-waterway',
+        image: '/src/assets/images/fuyang-ecology-waterway.png',
+        position: {
+          bottom: '15%',
+          left: '50%',
+        },
       },
     ],
   },
@@ -142,6 +157,7 @@ const footerMenu = [
 const isMenuPopupVisible = ref(false)
 const menuItems: Ref<MenuItem[]> = ref([])
 const menuHistory: Ref<MenuItem[][]> = ref([])
+const currentMenuId = ref<string>('')
 
 // 監聽路由變化，決定是否顯示 popup
 watch(
@@ -151,13 +167,15 @@ watch(
     isMenuPopupVisible.value = false
     menuHistory.value = []
     menuItems.value = []
+    currentMenuId.value = ''
   },
 )
 
-const openMenuPopup = (menuData: MenuItem[] | undefined) => {
+const openMenuPopup = (menuData: MenuItem[] | undefined, menuId: string = '') => {
   if (menuData) {
     menuItems.value = menuData
     menuHistory.value = [menuData]
+    currentMenuId.value = menuId
     isMenuPopupVisible.value = true
   }
 }
@@ -166,6 +184,7 @@ const closeMenuPopup = () => {
   isMenuPopupVisible.value = false
   menuHistory.value = []
   menuItems.value = []
+  currentMenuId.value = ''
 }
 
 const goToPreviousMenu = () => {
@@ -217,7 +236,7 @@ window.addEventListener('load', () => {
               <a href="#" class="nav-wild-bird top" @click.prevent="openMenuPopup(headerMenu[0].children)">台北鳥會野鳥救傷中心</a>
             </li>
             <li>
-              <a href="#" class="nav-fuyang top" @click.prevent="openMenuPopup(headerMenu[1].children)">富陽自然生態公園</a>
+              <a href="#" class="nav-fuyang top" @click.prevent="openMenuPopup(headerMenu[1].children, headerMenu[1].id)">富陽自然生態公園</a>
             </li>
             <li>
               <a href="#" class="nav-cute top" @click.prevent="openMenuPopup(headerMenu[2].children)">中國科技大學</a>
@@ -259,7 +278,7 @@ window.addEventListener('load', () => {
   </footer>
 
   <!-- 顯示 header 的多層級選單 popup -->
-  <MenuPopup v-if="isMenuPopupVisible" :menuItems="menuItems" :has-history="menuHistory.length > 1" @close="closeMenuPopup" @menu-click="handleMenuClick" @go-back="goToPreviousMenu" />
+  <MenuPopup v-if="isMenuPopupVisible" :menuItems="menuItems" :menuId="currentMenuId" :has-history="menuHistory.length > 1" @close="closeMenuPopup" @menu-click="handleMenuClick" @go-back="goToPreviousMenu" />
 
   <!-- 顯示內容元件的 popup (Dialog) -->
   <Popup />
