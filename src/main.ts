@@ -15,9 +15,9 @@ app.use(router)
 app.mount('#app')
 
 // 自動更新頁尾年份
-document.addEventListener('DOMContentLoaded', () => {
-  const yearElement = document.getElementById('current-year')
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear().toString()
+window.addEventListener('DOMContentLoaded', () => {
+  const currentYearElement = document.getElementById('current-year')
+  if (currentYearElement) {
+    currentYearElement.textContent = new Date().getFullYear().toString()
   }
 })
