@@ -46,34 +46,69 @@ const setThumbsSwiper = (swiper: SwiperType) => {
 // Sample images for the gallery
 const images = [
   {
-    url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop',
-    alt: '蟬聲休憩區全景',
-    caption: '蟬聲休憩區全景 - 綠意盎然的休憩空間',
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/wild-coffee.jpg', import.meta.url).href,
+    alt: '九節木',
+    caption: `九節木 Wild Coffee`,
   },
   {
-    url: 'https://images.unsplash.com/photo-1511497584788-876760111969?w=800&h=600&fit=crop',
-    alt: '樹林間的蟬',
-    caption: '樹林間的蟬 - 夏日的自然樂章',
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/inchworm-larva.jpg', import.meta.url).href,
+    alt: '尺蠖蛾幼蟲',
+    caption: `尺蠖蛾幼蟲 Inchworm`,
   },
   {
-    url: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&h=600&fit=crop',
-    alt: '休憩座椅',
-    caption: '休憩座椅 - 在自然中放鬆身心',
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/oriental-blechnum.jpg', import.meta.url).href,
+    alt: '烏毛蕨',
+    caption: `烏毛蕨 Oriental Blechnum`,
   },
   {
-    url: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=800&h=600&fit=crop',
-    alt: '林間小徑',
-    caption: '林間小徑 - 通往寧靜的步道',
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/flying-spider-monkey-fern-spore.jpg', import.meta.url).href,
+    alt: '鬼桫欏胞子',
+    caption: `鬼桫欏(胞子) Flying Spider-monkey Fern (Spore)`,
   },
   {
-    url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=600&fit=crop',
-    alt: '自然生態',
-    caption: '自然生態 - 豐富的動植物生態系統',
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/flying-spider-monkey-fern.jpg', import.meta.url).href,
+    alt: '鬼桫欏',
+    caption: `鬼桫欏 Flying Spider-monkey Fern`,
   },
   {
-    url: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&h=600&fit=crop',
-    alt: '夕陽下的公園',
-    caption: '夕陽下的公園 - 黃昏時分的寧靜美景',
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/tortricid-moth-larva.jpg', import.meta.url).href,
+    alt: '偽捲蛾幼蟲',
+    caption: `偽捲蛾幼蟲 Tortricid Moth Larva`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/soft-haired-persimmon.jpg', import.meta.url).href,
+    alt: '軟毛柿',
+    caption: `軟毛柿 Soft-haired Persimmon`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/staff-sergeant-butterfly.jpg', import.meta.url).href,
+    alt: '單帶蛺蝶',
+    caption: `單帶蛺蝶 Staff Sergeant Butterfly`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/sour-creeper.jpg', import.meta.url).href,
+    alt: '酸藤',
+    caption: `酸藤 Sour Creeper`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/sour-creeper-01.jpg', import.meta.url).href,
+    alt: '酸藤1',
+    caption: `酸藤 Sour Creeper 01`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/elliptic-linear-fern-sporangium.jpg', import.meta.url).href,
+    alt: '橢圓線蕨包子囊',
+    caption: `橢圓線蕨(包子囊) Elliptic Linear Fern (Sporangium)`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/elliptic-linear-fern-02.jpg', import.meta.url).href,
+    alt: '橢圓線蕨2',
+    caption: `橢圓線蕨 Elliptic Linear Fern 02`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/cicada-rest-area/angiopteris-fern.jpg', import.meta.url).href,
+    alt: '觀音座蓮蕨類',
+    caption: `觀音座蓮蕨類 Angiopteris Fern`,
   },
 ]
 </script>

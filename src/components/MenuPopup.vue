@@ -187,6 +187,7 @@ const goBack = () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: #d3e3bb;
   background-image: url('@/assets/images/fuyang.png');
   background-size: 95%;
   background-position: center 70%;

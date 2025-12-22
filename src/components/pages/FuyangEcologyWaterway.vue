@@ -46,34 +46,84 @@ const setThumbsSwiper = (swiper: SwiperType) => {
 // Sample images for the ecology waterway gallery
 const images = [
   {
-    url: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&h=600&fit=crop',
-    alt: '生態水道全景',
-    caption: '生態水道全景 - 蜿蜒流淌的生命之源',
+    url: new URL('@/assets/images/fuyang/ecology-waterway/wild-coffee-leaf.jpg', import.meta.url).href,
+    alt: '九節木(葉子)',
+    caption: '九節木(葉子)  Wild Coffee (Leaf)',
   },
   {
-    url: 'https://images.unsplash.com/photo-1485841890310-6a055c88698a?w=800&h=600&fit=crop',
-    alt: '水中生態',
-    caption: '水中生態 - 清澈水流中的生命',
+    url: new URL('@/assets/images/fuyang/ecology-waterway/wild-coffee.jpg', import.meta.url).href,
+    alt: '九節木',
+    caption: '九節木  Wild Coffee',
   },
   {
-    url: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&h=600&fit=crop',
-    alt: '水道植被',
-    caption: '水道植被 - 水岸邊的綠色生態',
+    url: new URL('@/assets/images/fuyang/ecology-waterway/formosan-palm.jpg', import.meta.url).href,
+    alt: '山棕',
+    caption: '山棕	Formosan Palm',
   },
   {
-    url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
-    alt: '水道景觀',
-    caption: '水道景觀 - 自然與水的和諧共生',
+    url: new URL('@/assets/images/fuyang/ecology-waterway/saurauia.jpg', import.meta.url).href,
+    alt: '水冬瓜',
+    caption: '水冬瓜	Saurauia',
   },
   {
-    url: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&h=600&fit=crop',
-    alt: '水生植物',
-    caption: '水生植物 - 豐富的水域生態系統',
+    url: new URL('@/assets/images/fuyang/ecology-waterway/saurauia-03.jpg', import.meta.url).href,
+    alt: '水冬瓜3',
+    caption: '水冬瓜3	Saurauia 03',
   },
   {
-    url: 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800&h=600&fit=crop',
-    alt: '水道倒影',
-    caption: '水道倒影 - 水面映照的自然之美',
+    url: new URL('@/assets/images/fuyang/ecology-waterway/common-yellow-stem-fig.jpg', import.meta.url).href,
+    alt: '水同木',
+    caption: '水同木	Common Yellow Stem-fig',
+  },
+  {
+    url: new URL('@/assets/images/fuyang/ecology-waterway/wendlandia.jpg', import.meta.url).href,
+    alt: '水金京',
+    caption: '水金京	Wendlandia',
+  },
+  {
+    url: new URL('@/assets/images/fuyang/ecology-waterway/wendlandia-02.jpg', import.meta.url).href,
+    alt: '水金京2',
+    caption: '水金京2	Wendlandia 02',
+  },
+  {
+    url: new URL('@/assets/images/fuyang/ecology-waterway/alocasia-odora.jpg', import.meta.url).href,
+    alt: '姑婆芋',
+    caption: '姑婆芋	Giant Upright Elephant Ear',
+  },
+  {
+    url: new URL('@/assets/images/fuyang/ecology-waterway/crab-eating-mongoose.jpg', import.meta.url).href,
+    alt: '食蟹獴',
+    caption: '食蟹獴	Crab-eating Mongoose',
+  },
+  {
+    url: new URL('@/assets/images/fuyang/ecology-waterway/crab-eating-mongoose-02.jpg', import.meta.url).href,
+    alt: '食蟹獴2',
+    caption: '食蟹獴2	Crab-eating Mongoose 02',
+  },
+  {
+    url: new URL('@/assets/images/fuyang/ecology-waterway/house-centipede.jpg', import.meta.url).href,
+    alt: '蚰蜒',
+    caption: '蚰蜒	House Centipede',
+  },
+  {
+    url: new URL('@/assets/images/fuyang/ecology-waterway/lewis-linear-fern.jpg', import.meta.url).href,
+    alt: '萊氏線蕨',
+    caption: "萊氏線蕨	Lewis's Linear Fern",
+  },
+  {
+    url: new URL('@/assets/images/fuyang/ecology-waterway/lewis-linear-fern-02.jpg', import.meta.url).href,
+    alt: '萊氏線蕨2',
+    caption: "萊氏線蕨2	Lewis's Linear Fern 02",
+  },
+  {
+    url: new URL('@/assets/images/fuyang/ecology-waterway/lewis-linear-fern-03.jpg', import.meta.url).href,
+    alt: '萊氏線蕨3',
+    caption: "萊氏線蕨3	Lewis's Linear Fern 03",
+  },
+  {
+    url: new URL('@/assets/images/fuyang/ecology-waterway/hokou-gecko-egg.jpg', import.meta.url).href,
+    alt: '鉛山壁虎 蛋',
+    caption: '鉛山壁虎 蛋	Hokou Gecko Egg',
   },
 ]
 </script>

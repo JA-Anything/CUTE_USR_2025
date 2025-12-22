@@ -46,34 +46,54 @@ const setThumbsSwiper = (swiper: SwiperType) => {
 // Sample images for the wetland observation gallery
 const images = [
   {
-    url: 'https://images.unsplash.com/photo-1484591974057-265bb767ef71?w=800&h=600&fit=crop',
-    alt: '溼地觀察區全景',
-    caption: '溼地觀察區全景 - 生物多樣性的天堂',
+    url: new URL('@/assets/images/fuyang/wetland-observation/schefflera-tree.jpg', import.meta.url).href,
+    alt: '江某',
+    caption: `江某 Schefflera Tree`,
   },
   {
-    url: 'https://images.unsplash.com/photo-1535083783855-76ae62b2914e?w=800&h=600&fit=crop',
-    alt: '溼地水鳥',
-    caption: '溼地水鳥 - 優雅的溼地居民',
+    url: new URL('@/assets/images/fuyang/wetland-observation/mientien-tree-frog.jpg', import.meta.url).href,
+    alt: '面天樹蛙',
+    caption: `面天樹蛙 Mientien Tree Frog`,
   },
   {
-    url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&h=600&fit=crop',
-    alt: '溼地植物',
-    caption: '溼地植物 - 獨特的水生植被',
+    url: new URL('@/assets/images/fuyang/wetland-observation/lichen-moth-larva.jpg', import.meta.url).href,
+    alt: '閃光苔蛾幼蟲',
+    caption: `閃光苔蛾幼蟲 Lichen Moth Larva`,
   },
   {
-    url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=600&fit=crop',
-    alt: '觀察步道',
-    caption: '觀察步道 - 近距離接觸自然',
+    url: new URL('@/assets/images/fuyang/wetland-observation/swinhoes-snail.jpg', import.meta.url).href,
+    alt: '斯文豪氏蝸牛',
+    caption: `斯文豪氏蝸牛 Swinhoe's Snail`,
   },
   {
-    url: 'https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=800&h=600&fit=crop',
-    alt: '溼地生態',
-    caption: '溼地生態 - 豐富的生態系統',
+    url: new URL('@/assets/images/fuyang/wetland-observation/loepa-moth-eating-saurauia.jpg', import.meta.url).href,
+    alt: '黃豹天蠶蛾和吃水冬瓜葉子',
+    caption: `黃豹天蠶蛾吃水冬瓜葉 Loepa Moth eating Saurauia Leaf`,
   },
   {
-    url: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&h=600&fit=crop',
-    alt: '溼地日落',
-    caption: '溼地日落 - 黃昏時分的溼地美景',
+    url: new URL('@/assets/images/fuyang/wetland-observation/loepa-moth-eating-saurauia-02.jpg', import.meta.url).href,
+    alt: '黃豹天蠶蛾和吃水冬瓜葉子2',
+    caption: `黃豹天蠶蛾吃水冬瓜葉 Loepa Moth eating Saurauia Leaf 02`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/wetland-observation/round-leaf-lasianthus-01.jpg', import.meta.url).href,
+    alt: '圓葉雞屎樹1',
+    caption: `圓葉雞屎樹 Round-leaf Lasianthus 01`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/wetland-observation/round-leaf-lasianthus-02.jpg', import.meta.url).href,
+    alt: '圓葉雞屎樹2',
+    caption: `圓葉雞屎樹 Round-leaf Lasianthus 02`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/wetland-observation/freshwater-mangrove.jpg', import.meta.url).href,
+    alt: '穗花棋盤腳',
+    caption: `穗花棋盤腳 Freshwater Mangrove`,
+  },
+  {
+    url: new URL('@/assets/images/fuyang/wetland-observation/freshwater-mangrove-02.jpg', import.meta.url).href,
+    alt: '穗花棋盤腳2',
+    caption: `穗花棋盤腳 Freshwater Mangrove 02`,
   },
 ]
 </script>
