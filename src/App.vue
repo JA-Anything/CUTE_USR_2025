@@ -8,6 +8,11 @@ import type { MenuItem } from '@/types'
 const route = useRoute()
 const router = useRouter()
 
+// 導入富陽選單的圖片，確保它們被 Vite 打包
+import fuyangWetlandImage from '@/assets/images/fuyang-wetland-observation.png'
+import fuyangCicadaImage from '@/assets/images/fuyang-cicada-rest-area.png'
+import fuyangWaterwayImage from '@/assets/images/fuyang-ecology-waterway.png'
+
 // 定義選單和對應的路由路徑
 const headerMenu: MenuItem[] = [
   {
@@ -51,21 +56,21 @@ const headerMenu: MenuItem[] = [
         label: '濕地生態觀察區',
         name: 'FuyangWetlandObservation',
         path: '/fuyang/wetland-observation',
-        image: '/src/assets/images/fuyang-wetland-observation.png',
+        image: fuyangWetlandImage,
       },
       {
         id: 'fuyang-cicada',
         label: '戀戀蟬聲休憩區',
         name: 'FuyangCicadaRestArea',
         path: '/fuyang/cicada-rest-area',
-        image: '/src/assets/images/fuyang-cicada-rest-area.png',
+        image: fuyangCicadaImage,
       },
       {
         id: 'fuyang-waterway',
         label: '生態水道區',
         name: 'FuyangEcologyWaterway',
         path: '/fuyang/ecology-waterway',
-        image: '/src/assets/images/fuyang-ecology-waterway.png',
+        image: fuyangWaterwayImage,
       },
     ],
   },
