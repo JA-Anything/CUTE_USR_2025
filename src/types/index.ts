@@ -2,6 +2,7 @@
 export interface MenuItem {
   id: string
   label: string
+  hidden?: boolean
   className?: string
   name?: string
   path?: string

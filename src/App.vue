@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Ref, watch, ref } from 'vue'
+import { type Ref, watch, ref, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import Popup from './components/Popup.vue'
 import MenuPopup from './components/MenuPopup.vue'
@@ -7,11 +7,6 @@ import type { MenuItem } from '@/types'
 
 const route = useRoute()
 const router = useRouter()
-
-// 導入富陽選單的圖片，確保它們被 Vite 打包
-import fuyangWetlandImage from '@/assets/images/fuyang-wetland-observation.png'
-import fuyangCicadaImage from '@/assets/images/fuyang-cicada-rest-area.png'
-import fuyangWaterwayImage from '@/assets/images/fuyang-ecology-waterway.png'
 
 // 定義選單和對應的路由路徑
 const headerMenu: MenuItem[] = [
@@ -29,6 +24,7 @@ const headerMenu: MenuItem[] = [
       {
         id: 'wild-bird-quiz',
         label: '野鳥知識大挑戰',
+        hidden: true,
         name: 'WildBirdQuiz',
         path: '/wild-bird/quiz',
       },
@@ -56,21 +52,18 @@ const headerMenu: MenuItem[] = [
         label: '濕地生態觀察區',
         name: 'FuyangWetlandObservation',
         path: '/fuyang/wetland-observation',
-        image: fuyangWetlandImage,
       },
       {
         id: 'fuyang-cicada',
         label: '戀戀蟬聲休憩區',
         name: 'FuyangCicadaRestArea',
         path: '/fuyang/cicada-rest-area',
-        image: fuyangCicadaImage,
       },
       {
         id: 'fuyang-waterway',
         label: '生態水道區',
         name: 'FuyangEcologyWaterway',
         path: '/fuyang/ecology-waterway',
-        image: fuyangWaterwayImage,
       },
     ],
   },
@@ -152,6 +145,14 @@ const menuItems: Ref<MenuItem[]> = ref([])
 const menuHistory: Ref<MenuItem[][]> = ref([])
 const currentMenuId = ref<string>('')
 
+const getVisibleMenuItems = (items: MenuItem[] = []): MenuItem[] =>
+  items
+    .filter((item) => !item.hidden)
+    .map((item) => ({
+      ...item,
+      children: item.children ? getVisibleMenuItems(item.children) : undefined,
+    }))
+
 // 監聽路由變化，決定是否顯示 popup
 watch(
   () => route.name,
@@ -165,9 +166,10 @@ watch(
 )
 
 const openMenuPopup = (menuData: MenuItem[] | undefined, menuId: string = '') => {
-  if (menuData) {
-    menuItems.value = menuData
-    menuHistory.value = [menuData]
+  const visibleMenuData = getVisibleMenuItems(menuData)
+  if (visibleMenuData.length > 0) {
+    menuItems.value = visibleMenuData
+    menuHistory.value = [visibleMenuData]
     currentMenuId.value = menuId
     isMenuPopupVisible.value = true
   }
@@ -192,60 +194,133 @@ const handleMenuClick = (item: MenuItem) => {
     router.push({ name: item.name }) // Navigate by name if it exists, fixing the type error.
     closeMenuPopup() // 導航後關閉選單
   } else if (item.children && item.children.length > 0) {
-    menuHistory.value.push(item.children)
-    menuItems.value = item.children
+    const visibleChildren = getVisibleMenuItems(item.children)
+    if (visibleChildren.length === 0) return
+    menuHistory.value.push(visibleChildren)
+    menuItems.value = visibleChildren
   }
 }
 
-// 地圖預設置中
-window.addEventListener('load', () => {
-  // 取得容器和內容元素，並加上明確的型別註解
-  const scrollContainer: HTMLDivElement | null = document.querySelector('.map-wrap')
-  const contentElement: HTMLDivElement | null = document.querySelector('.nav-map')
+// ── Map UX refs ──────────────────────────────────────────────────────────
+const mapWrapRef = ref<HTMLDivElement | null>(null)
+const scrollZone = ref(0)          // 0 = 左, 1 = 中, 2 = 右
+const showLeftArrow  = ref(false)
+const showRightArrow = ref(true)
+const hintDone = ref(false)        // 只做一次 hint 動畫
 
-  // 進行型別守衛（Type Guard），確保元素存在
-  if (scrollContainer && contentElement) {
-    // 計算內容和容器之間的寬度差異
-    const contentWidth: number = contentElement.offsetWidth
-    const containerWidth: number = scrollContainer.offsetWidth
+// 計算捲動區段 (0/1/2) 與顯示箭頭狀態
+function updateScrollState() {
+  const el = mapWrapRef.value
+  if (!el) return
+  const max = el.scrollWidth - el.clientWidth
+  const pos = el.scrollLeft
+  scrollZone.value = max <= 0 ? 1 : Math.min(2, Math.floor((pos / max) * 3))
+  showLeftArrow.value  = pos > 8
+  showRightArrow.value = pos < max - 8
+}
 
-    // 計算置中的捲動位置
-    const scrollToPosition: number = (contentWidth - containerWidth) / 2
+// 點箭頭捲動
+function scrollMap(delta: number) {
+  const el = mapWrapRef.value
+  if (!el) return
+  el.scrollTo({ left: el.scrollLeft + delta, behavior: 'smooth' })
+}
 
-    // 調整容器的水平捲軸位置
-    scrollContainer.scrollLeft = scrollToPosition
-  }
+// 進站置中 + hint 微移動（只在手機尺寸執行）
+function initMapScroll() {
+  const el = mapWrapRef.value
+  if (!el) return
+  const navMap = el.querySelector('.nav-map') as HTMLElement | null
+  if (!navMap) return
+
+  const centerX = (navMap.offsetWidth - el.clientWidth) / 2
+  el.scrollLeft = centerX
+  updateScrollState()
+
+  // 只在手機（有橫向捲動空間）才做 hint
+  if (navMap.offsetWidth <= el.clientWidth || hintDone.value) return
+  hintDone.value = true
+
+  setTimeout(() => {
+    el.scrollTo({ left: centerX - 100, behavior: 'smooth' })
+    setTimeout(() => {
+      el.scrollTo({ left: centerX, behavior: 'smooth' })
+    }, 650)
+  }, 500)
+}
+
+onMounted(() => {
+  // 等待字型與圖片載入後才計算寬度
+  window.addEventListener('load', initMapScroll)
+  // 若 load 已觸發過（SPA 熱重載），立刻執行
+  if (document.readyState === 'complete') initMapScroll()
+
+  mapWrapRef.value?.addEventListener('scroll', updateScrollState, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('load', initMapScroll)
+  mapWrapRef.value?.removeEventListener('scroll', updateScrollState)
 })
 </script>
 
 <template>
   <header>
     <h1><RouterLink to="/">翱．生態-共善六張犁</RouterLink></h1>
-    <div class="map-wrap">
-      <div class="nav-map">
-        <nav>
-          <ul>
-            <li>
-              <a href="#" class="nav-wild-bird top" @click.prevent="openMenuPopup(headerMenu[0].children)">台北鳥會野鳥救傷中心</a>
-            </li>
-            <li>
-              <a href="#" class="nav-fuyang top" @click.prevent="openMenuPopup(headerMenu[1].children, headerMenu[1].id)">富陽自然生態公園</a>
-            </li>
-            <li>
-              <a href="#" class="nav-cute top" @click.prevent="openMenuPopup(headerMenu[2].children)">中國科技大學</a>
-            </li>
-            <li>
-              <a href="#" class="nav-temple bottom" @click.prevent="openMenuPopup(headerMenu[3].children)">石泉巖清水祖師廟</a>
-            </li>
-            <li>
-              <a href="#" class="nav-dawo right" @click.prevent="openMenuPopup(headerMenu[4].children)">大我新舍</a>
-            </li>
-            <li>
-              <a href="#" class="nav-lihe left" @click.prevent="openMenuPopup(headerMenu[5].children)">黎和生態公園</a>
-            </li>
-          </ul>
-        </nav>
+
+    <!-- 地圖容器：相對定位，讓箭頭可以疊在地圖兩側 -->
+    <div class="map-container">
+
+      <!-- 左箭頭（手機限定，捲到最左時隱藏） -->
+      <button
+        class="map-arrow map-arrow--left"
+        :class="{ visible: showLeftArrow }"
+        aria-label="向左捲動"
+        @click="scrollMap(-280)"
+      >‹</button>
+
+      <div class="map-wrap" ref="mapWrapRef">
+        <div class="nav-map">
+          <nav>
+            <ul>
+              <li>
+                <a href="#" class="nav-wild-bird top" @click.prevent="openMenuPopup(headerMenu[0].children)">台北鳥會野鳥救傷中心</a>
+              </li>
+              <li>
+                <a href="#" class="nav-fuyang top" @click.prevent="openMenuPopup(headerMenu[1].children, headerMenu[1].id)">富陽自然生態公園</a>
+              </li>
+              <li>
+                <a href="#" class="nav-cute top" @click.prevent="openMenuPopup(headerMenu[2].children)">中國科技大學</a>
+              </li>
+              <li>
+                <a href="#" class="nav-temple bottom" @click.prevent="openMenuPopup(headerMenu[3].children)">石泉巖清水祖師廟</a>
+              </li>
+              <li>
+                <a href="#" class="nav-dawo right" @click.prevent="openMenuPopup(headerMenu[4].children)">大我新舍</a>
+              </li>
+              <li>
+                <a href="#" class="nav-lihe left" @click.prevent="openMenuPopup(headerMenu[5].children)">黎和生態公園</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
+
+      <!-- 右箭頭（手機限定，捲到最右時隱藏） -->
+      <button
+        class="map-arrow map-arrow--right"
+        :class="{ visible: showRightArrow }"
+        aria-label="向右捲動"
+        @click="scrollMap(280)"
+      >›</button>
+
+      <!-- 底部進度點（手機限定） -->
+      <div class="map-dots">
+        <span class="map-dot" :class="{ active: scrollZone === 0 }" @click="scrollMap(-600)" />
+        <span class="map-dot" :class="{ active: scrollZone === 1 }" @click="scrollMap(0)" />
+        <span class="map-dot" :class="{ active: scrollZone === 2 }" @click="scrollMap(600)" />
+      </div>
+
     </div>
   </header>
 
@@ -277,4 +352,86 @@ window.addEventListener('load', () => {
   <Popup />
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+/* ── Map container：包住 map-wrap + 箭頭 ── */
+.map-container {
+  position: relative;
+  width: 100%;
+  /* 把 dots 的空間留出來（只在手機顯示） */
+  padding-bottom: 0;
+  @media (max-width: 767px) {
+    padding-bottom: 28px;
+  }
+}
+
+/* ── 左右箭頭（預設隱藏，只在手機且有捲動空間時顯示） ── */
+.map-arrow {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(calc(-50% - 14px)); /* 微調：避開底部 dots */
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  font-size: 26px;
+  line-height: 1;
+  color: #328275;
+  cursor: pointer;
+  /* 預設透明，有 .visible 才出現 */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, background 0.2s ease;
+
+  &:hover { background: rgba(255, 255, 255, 1); }
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &--left  { left: 6px; }
+  &--right { right: 6px; }
+
+  /* 只在手機顯示 */
+  @media (max-width: 767px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ── 底部進度點（只在手機顯示） ── */
+.map-dots {
+  display: none;
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 8px;
+  z-index: 10;
+
+  @media (max-width: 767px) {
+    display: flex;
+  }
+}
+
+.map-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+
+  &.active {
+    background: rgba(50, 130, 117, 0.9);
+    transform: scale(1.25);
+  }
+}
+</style>

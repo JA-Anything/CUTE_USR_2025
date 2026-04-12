@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/yachenschang/Library/CloudStorage/GoogleDrive-jon.taiwanmobile@gmail.com/我的雲端硬碟/Side Project/USR_website/CUTE_USR_2025/_raw-materials/**)",
+      "Read(//Users/yachenschang/Library/CloudStorage/**)",
+      "Bash(ls -1 \"_raw-materials/WildBird/城市常見野鳥/完稿-24種鳥類20240902-2\"*.jpg)",
+      "Bash(unzip -o WildBirdUrbanBirds.zip -d WildBirdUrbanBirds)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm install:*)",
+      "Bash(npx vite:*)"
+    ]
+  }
+}

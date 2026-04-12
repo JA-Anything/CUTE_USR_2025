@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent, ref, shallowRef, watch } from 'vue'
+import { defineAsyncComponent, ref, shallowRef, watch, h } from 'vue'
 import type { Component } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -8,39 +8,57 @@ const router = useRouter()
 
 const currentComponent = shallowRef<Component | null>(null)
 const isLoading = ref(false)
+const loadError = ref<string | null>(null)
+
+// 統一的 async component 工廠，帶錯誤處理
+function asyncPage(loader: () => Promise<unknown>): Component {
+  return defineAsyncComponent({
+    loader: loader as () => Promise<Component>,
+    errorComponent: {
+      setup() {
+        return () => h('div', { style: 'padding:2rem;color:#b91c1c;font-family:sans-serif' },
+          '⚠️ 頁面載入失敗，請重新整理後再試。')
+      },
+    },
+    onError(err) {
+      console.error('[Popup] async component error:', err)
+      loadError.value = err.message ?? String(err)
+    },
+  })
+}
 
 // 定義一個包含所有動態元件的對象，並使用前綴來區分單元
 const componentMap: Record<string, Component> = {
   // 台北鳥會野鳥救傷中心
-  WildBirdUrbanBirds: defineAsyncComponent(() => import('@/components/pages/WildBirdUrbanBirds.vue')),
-  WildBirdQuiz: defineAsyncComponent(() => import('@/components/pages/WildBirdQuiz.vue')),
-  WildBirdCuteBirdDIY: defineAsyncComponent(() => import('@/components/pages/WildBirdCuteBirdDIY.vue')),
-  WildBirdGuide: defineAsyncComponent(() => import('@/components/pages/WildBirdGuide.vue')),
+  WildBirdUrbanBirds: asyncPage(() => import('@/components/pages/WildBirdUrbanBirds.vue')),
+  WildBirdQuiz:       asyncPage(() => import('@/components/pages/WildBirdQuiz.vue')),
+  WildBirdCuteBirdDIY: asyncPage(() => import('@/components/pages/WildBirdCuteBirdDIY.vue')),
+  WildBirdGuide:      asyncPage(() => import('@/components/pages/WildBirdGuide.vue')),
 
   // 富陽自然生態公園
-  FuyangWetlandObservation: defineAsyncComponent(() => import('@/components/pages/FuyangWetlandObservation.vue')),
-  FuyangCicadaRestArea: defineAsyncComponent(() => import('@/components/pages/FuyangCicadaRestArea.vue')),
-  FuyangEcologyWaterway: defineAsyncComponent(() => import('@/components/pages/FuyangEcologyWaterway.vue')),
+  FuyangWetlandObservation: asyncPage(() => import('@/components/pages/FuyangWetlandObservation.vue')),
+  FuyangCicadaRestArea:     asyncPage(() => import('@/components/pages/FuyangCicadaRestArea.vue')),
+  FuyangEcologyWaterway:    asyncPage(() => import('@/components/pages/FuyangEcologyWaterway.vue')),
 
   // 中國科技大學
-  CUTEUpcomingEvents: defineAsyncComponent(() => import('@/components/pages/CUTEUpcomingEvents.vue')),
-  CUTEHistoricalEvents: defineAsyncComponent(() => import('@/components/pages/CUTEHistoricalEvents.vue')),
+  CUTEUpcomingEvents:  asyncPage(() => import('@/components/pages/CUTEUpcomingEvents.vue')),
+  CUTEHistoricalEvents: asyncPage(() => import('@/components/pages/CUTEHistoricalEvents.vue')),
 
   // 石泉巖清水祖師廟
-  TempleHistoricalSites: defineAsyncComponent(() => import('@/components/pages/TempleHistoricalSites.vue')),
-  TempleCulturalTour: defineAsyncComponent(() => import('@/components/pages/TempleCulturalTour.vue')),
+  TempleHistoricalSites: asyncPage(() => import('@/components/pages/TempleHistoricalSites.vue')),
+  TempleCulturalTour:    asyncPage(() => import('@/components/pages/TempleCulturalTour.vue')),
 
   // 大我新舍
-  DawoVeteransStories: defineAsyncComponent(() => import('@/components/pages/DawoVeteransStories.vue')),
-  DawoTour: defineAsyncComponent(() => import('@/components/pages/DawoTour.vue')),
+  DawoVeteransStories: asyncPage(() => import('@/components/pages/DawoVeteransStories.vue')),
+  DawoTour:            asyncPage(() => import('@/components/pages/DawoTour.vue')),
 
   // 黎和生態公園
-  LiheStory: defineAsyncComponent(() => import('@/components/pages/LiheStory.vue')),
+  LiheStory: asyncPage(() => import('@/components/pages/LiheStory.vue')),
 
   // 頁尾選單
-  Privacy: defineAsyncComponent(() => import('@/components/pages/Privacy.vue')),
-  Terms: defineAsyncComponent(() => import('@/components/pages/Terms.vue')),
-  Disclaimer: defineAsyncComponent(() => import('@/components/pages/Disclaimer.vue')),
+  Privacy:    asyncPage(() => import('@/components/pages/Privacy.vue')),
+  Terms:      asyncPage(() => import('@/components/pages/Terms.vue')),
+  Disclaimer: asyncPage(() => import('@/components/pages/Disclaimer.vue')),
 }
 
 // 根據傳入的 componentName 載入對應的元件
