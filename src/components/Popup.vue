@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { defineAsyncComponent, ref, shallowRef, watch, h } from 'vue'
+import { defineAsyncComponent, ref, shallowRef, watch, computed, h } from 'vue'
 import type { Component } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
+
+const emit = defineEmits<{ goBack: [pathPrefix: string] }>()
+
+const MENU_PREFIXES = ['wild-bird', 'fuyang', 'cute', 'temple', 'dawo', 'lihe']
+const pathPrefix = computed(() => route.path.split('/')[1] ?? '')
+const hasParentMenu = computed(() => MENU_PREFIXES.includes(pathPrefix.value))
 
 const currentComponent = shallowRef<Component | null>(null)
 const isLoading = ref(false)
@@ -41,7 +47,8 @@ const componentMap: Record<string, Component> = {
   FuyangEcologyWaterway:    asyncPage(() => import('@/components/pages/FuyangEcologyWaterway.vue')),
 
   // 中國科技大學
-  CUTEUpcomingEvents:  asyncPage(() => import('@/components/pages/CUTEUpcomingEvents.vue')),
+  CUTECommunityEcology: asyncPage(() => import('@/components/pages/CUTECommunityEcology.vue')),
+  CUTEUpcomingEvents:   asyncPage(() => import('@/components/pages/CUTEUpcomingEvents.vue')),
   CUTEHistoricalEvents: asyncPage(() => import('@/components/pages/CUTEHistoricalEvents.vue')),
 
   // 石泉巖清水祖師廟
@@ -83,12 +90,17 @@ watch(
 const closePopup = () => {
   router.push('/')
 }
+
+const goBack = () => {
+  emit('goBack', pathPrefix.value)
+}
 </script>
 
 <template>
   <div class="popup-overlay" v-if="currentComponent" @click.self="closePopup">
     <div class="popup-content">
       <div class="popup-header">
+        <button v-if="hasParentMenu" class="back-button" @click="goBack">‹ 回上層</button>
         <button class="close-button" @click="closePopup">&times;</button>
       </div>
       <div class="popup-body">
@@ -132,19 +144,36 @@ const closePopup = () => {
 
 .popup-header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
   background-color: #f8f8f8;
   border-bottom: 1px solid #ddd;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.back-button:hover {
+  color: #333;
 }
 
 .close-button {
   background: none;
   border: none;
   font-size: 2rem;
+  line-height: 1;
   cursor: pointer;
   color: #888;
   transition: color 0.2s ease;
+  margin-left: auto;
 }
 
 .close-button:hover {
@@ -154,8 +183,8 @@ const closePopup = () => {
 .popup-body {
   flex-grow: 1;
   width: 100%;
-  padding: 1rem;
   box-sizing: border-box;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 

@@ -75,20 +75,20 @@ const headerMenu: MenuItem[] = [
       {
         id: 'cute-community',
         label: '社區生態資源與生活',
-        children: [
-          {
-            id: 'cute-upcoming',
-            label: '活動預告',
-            name: 'CUTEUpcomingEvents',
-            path: '/cute/upcoming-events',
-          },
-          {
-            id: 'cute-historical',
-            label: '歷史活動',
-            name: 'CUTEHistoricalEvents',
-            path: '/cute/historical-events',
-          },
-        ],
+        name: 'CUTECommunityEcology',
+        path: '/cute/community-ecology',
+      },
+      {
+        id: 'cute-upcoming',
+        label: '活動預告',
+        name: 'CUTEUpcomingEvents',
+        path: '/cute/upcoming-events',
+      },
+      {
+        id: 'cute-historical',
+        label: '歷史活動',
+        name: 'CUTEHistoricalEvents',
+        path: '/cute/historical-events',
       },
     ],
   },
@@ -180,6 +180,25 @@ const closeMenuPopup = () => {
   menuHistory.value = []
   menuItems.value = []
   currentMenuId.value = ''
+}
+
+// 路徑前綴對應 headerMenu 的 index
+const menuPrefixMap: Record<string, number> = {
+  'wild-bird': 0,
+  'fuyang': 1,
+  'cute': 2,
+  'temple': 3,
+  'dawo': 4,
+  'lihe': 5,
+}
+
+const handlePopupGoBack = (pathPrefix: string) => {
+  const idx = menuPrefixMap[pathPrefix]
+  if (idx === undefined) { router.push('/'); return }
+  const entry = headerMenu[idx]
+  router.push('/').then(() => {
+    openMenuPopup(entry.children, entry.id ?? '')
+  })
 }
 
 const goToPreviousMenu = () => {
@@ -349,7 +368,7 @@ onUnmounted(() => {
   <MenuPopup v-if="isMenuPopupVisible" :menuItems="menuItems" :menuId="currentMenuId" :has-history="menuHistory.length > 1" @close="closeMenuPopup" @menu-click="handleMenuClick" @go-back="goToPreviousMenu" />
 
   <!-- 顯示內容元件的 popup (Dialog) -->
-  <Popup />
+  <Popup @go-back="handlePopupGoBack" />
 </template>
 
 <style scoped lang="scss">

@@ -156,9 +156,9 @@ const diyBirds: DiyBird[] = [
     id: 4,
     name: '臺灣藍鵲',
     englishName: 'Taiwan Blue Magpie',
-    available: false,
+    available: true,
     imageUrl: diyImg('diy-taiwanlanque.jpg'),
-    pdfPath: null,
+    pdfPath: '/downloads/wild-bird/diy-taiwanlanque.pdf',
   },
 ]
 

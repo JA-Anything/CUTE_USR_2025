@@ -7,7 +7,9 @@
       "Bash(unzip -o WildBirdUrbanBirds.zip -d WildBirdUrbanBirds)",
       "mcp__Claude_Preview__preview_start",
       "Bash(npm install:*)",
-      "Bash(npx vite:*)"
+      "Bash(npx vite:*)",
+      "Bash(find \"_design/HistoryEvents/\" -type f -exec ls -lh {} \\\\;)",
+      "Bash(awk '{print $5, $9}')"
     ]
   }
 }

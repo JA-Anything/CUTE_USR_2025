@@ -42,6 +42,11 @@ const routes = [
     component: () => import('@/components/pages/FuyangWetlandObservation.vue'),
   },
   {
+    path: '/cute/community-ecology',
+    name: 'CUTECommunityEcology',
+    component: () => import('@/components/pages/CUTECommunityEcology.vue'),
+  },
+  {
     path: '/cute/upcoming-events',
     name: 'CUTEUpcomingEvents',
     component: () => import('@/components/pages/CUTEUpcomingEvents.vue'),
