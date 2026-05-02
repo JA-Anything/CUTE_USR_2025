@@ -168,8 +168,8 @@ const ageCards = [
     emoji: '🐦',
     name: '幼鳥',
     badge: '視情況判斷',
-    badgeColor: '#2c5f2d',
-    borderColor: '#2c5f2d',
+    badgeColor: '#1a4a6e',
+    borderColor: '#1a4a6e',
     points: [
       '羽毛已漸長齊，但仍蓬鬆',
       '能短距離跳躍，翅膀尚弱',
@@ -234,10 +234,10 @@ const contacts = [
 /* ── Page background ──────────────────────────────────────────────────── */
 .guide-page-bg {
   min-height: 100vh;
-  background-color: #d3e3bb;
+  background-color: #e8f2fc;
   background-image:
-    radial-gradient(ellipse at 20% 30%, rgba(100,140,60,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 70%, rgba(60,100,40,0.14) 0%, transparent 55%);
+    radial-gradient(ellipse at 20% 30%, rgba(60,100,140,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(40,80,120,0.14) 0%, transparent 55%);
   padding: 32px 16px 48px;
   display: flex;
   justify-content: center;
@@ -257,8 +257,8 @@ const contacts = [
 /* ── Header ───────────────────────────────────────────────────────────── */
 .guide-header {
   padding: 36px 40px 28px;
-  border-bottom: 1px solid rgba(44,95,45,0.12);
-  background: linear-gradient(135deg, rgba(211,227,187,0.5) 0%, rgba(255,255,255,0) 60%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(160deg, #0d2a3e 0%, #1a4a6e 100%);
   position: relative;
 
   &__deco {
@@ -266,7 +266,7 @@ const contacts = [
     top: 18px;
     right: 40px;
     font-size: 68px;
-    opacity: 0.07;
+    opacity: 0.1;
     user-select: none;
     line-height: 1;
     transform: rotate(15deg);
@@ -276,7 +276,7 @@ const contacts = [
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 28px;
     font-weight: 700;
-    color: #2c5f2d;
+    color: #fff;
     margin: 0 0 10px;
     letter-spacing: 0.04em;
     line-height: 1.3;
@@ -285,7 +285,7 @@ const contacts = [
   &__desc {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 15px;
-    color: #555;
+    color: rgba(255, 255, 255, 0.75);
     margin: 0;
     line-height: 1.7;
   }
@@ -301,9 +301,9 @@ const contacts = [
 .bar {
   height: 3px;
   border-radius: 2px;
-  &--orange-lg { width: 32px; background-color: #F57600; }
-  &--green     { width: 16px; background-color: #2c5f2d; }
-  &--orange-sm { width: 8px;  background-color: #F78B26; }
+  &--orange-lg { width: 32px; background-color: rgba(255, 255, 255, 0.7); }
+  &--green     { width: 16px; background-color: rgba(255, 255, 255, 0.45); }
+  &--orange-sm { width: 8px;  background-color: rgba(255, 255, 255, 0.25); }
 }
 
 /* ── Section wrapper ──────────────────────────────────────────────────── */
@@ -311,7 +311,7 @@ const contacts = [
   padding: 28px 40px 32px;
 
   &--tinted {
-    background-color: rgba(211,227,187,0.25);
+    background-color: rgba(208,228,245,0.25);
   }
 }
 
@@ -323,7 +323,7 @@ const contacts = [
   font-family: 'Noto Sans TC', sans-serif;
   font-size: 20px;
   font-weight: 700;
-  color: #2c5f2d;
+  color: #1a4a6e;
   margin-bottom: 8px;
 }
 :deep(.section-title__bar) {
@@ -341,8 +341,8 @@ const contacts = [
 }
 
 .sign-card {
-  background-color: #fff8f0;
-  border: 1px solid rgba(245,118,0,0.15);
+  background-color: #eef5ff;
+  border: 1px solid rgba(26,74,110,0.15);
   border-radius: 10px;
   padding: 18px 12px;
   text-align: center;
@@ -360,7 +360,7 @@ const contacts = [
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 14px;
     font-weight: 700;
-    color: #2c5f2d;
+    color: #1a4a6e;
   }
 
   &__desc {
@@ -412,7 +412,7 @@ const contacts = [
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 18px;
     font-weight: 700;
-    color: #2c5f2d;
+    color: #1a4a6e;
     text-align: center;
     margin-bottom: 14px;
   }
@@ -467,7 +467,7 @@ const contacts = [
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    color: #2c5f2d;
+    color: #1a4a6e;
     margin-bottom: 4px;
   }
 
@@ -521,7 +521,7 @@ const contacts = [
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px dashed rgba(44,95,45,0.15);
+  border-bottom: 1px dashed rgba(26,74,110,0.15);
   padding: 10px 0;
   gap: 12px;
 
@@ -529,18 +529,18 @@ const contacts = [
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 14px;
     font-weight: 600;
-    color: #2c5f2d;
+    color: #1a4a6e;
   }
 
   &__phone {
     background-color: #fff;
-    border: 1px solid rgba(44,95,45,0.2);
+    border: 1px solid rgba(26,74,110,0.2);
     border-radius: 6px;
     padding: 4px 12px;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 600;
-    color: #2c5f2d;
+    color: #1a4a6e;
     letter-spacing: 0.03em;
     white-space: nowrap;
     flex-shrink: 0;
@@ -578,8 +578,8 @@ const contacts = [
 /* ── Footer ───────────────────────────────────────────────────────────── */
 .guide-footer {
   padding: 16px 32px;
-  border-top: 1px solid rgba(44,95,45,0.1);
-  background-color: rgba(211,227,187,0.25);
+  border-top: 1px solid rgba(26,74,110,0.1);
+  background-color: rgba(208,228,245,0.25);
   display: flex;
   align-items: center;
   justify-content: space-between;

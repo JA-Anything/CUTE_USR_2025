@@ -110,22 +110,20 @@ interface Bird {
 // Vite glob import — lazy (non-eager) 讓 Vite 靜態分析路徑但不在模組初始化時一次性 import 全部檔案
 // 使用 eager:true + import:'default' 在圖片檔案過多時可能造成模組初始化失敗
 const birdGlobs = import.meta.glob(
-  '@/assets/images/wild-bird/urban-birds/bird-*.jpg',
+  '@/assets/images/wild-bird/urban-birds/bird-*.webp',
   { eager: true, import: 'default' }
 ) as Record<string, string>
 
 const img = (num: string): string => {
-  // 支援零補位 (01) 和不補位 (1) 兩種格式
-  const padded   = `bird-${num}.jpg`
-  const key = Object.keys(birdGlobs).find((k) => k.endsWith(padded))
+  const stem = `bird-${num}.`
+  const key = Object.keys(birdGlobs).find((k) => k.includes(stem))
   if (key) return birdGlobs[key] as string
-  console.warn(`[WildBirdUrbanBirds] 找不到圖片: ${padded}`, Object.keys(birdGlobs))
   return ''
 }
 
 const fullImg = (num: string): string => {
-  const padded = `bird-${num}_full.jpg`
-  const key = Object.keys(birdGlobs).find((k) => k.endsWith(padded))
+  const stem = `bird-${num}_full.`
+  const key = Object.keys(birdGlobs).find((k) => k.includes(stem))
   if (key) return birdGlobs[key] as string
   return img(num)
 }
@@ -227,26 +225,28 @@ onUnmounted(() => {
   margin: 0 auto;
   padding: 0;
   text-align: left;
+  min-height: 100vh;
+  background-color: #e8f2fc;
 }
 
 /* ── Header ── */
 .bird-header {
   padding: 36px 40px 28px;
-  border-bottom: 1px solid rgba(44, 95, 45, 0.12);
-  background: linear-gradient(135deg, rgba(211, 227, 187, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(160deg, #0d2a3e 0%, #1a4a6e 100%);
 }
 
 .bird-header h2 {
   font-size: 28px;
   font-weight: 700;
-  color: #2c5f2d;
+  color: #fff;
   margin: 0 0 10px;
   letter-spacing: 0.04em;
 }
 
 .subtitle {
   font-size: 15px;
-  color: #555;
+  color: rgba(255, 255, 255, 0.75);
   margin: 0;
   line-height: 1.7;
 }
@@ -258,9 +258,9 @@ onUnmounted(() => {
   margin-top: 16px;
 }
 .deco-bar { display: block; height: 3px; border-radius: 2px; }
-.bar-orange { width: 32px; background-color: #f57600; }
-.bar-green  { width: 16px; background-color: #2c5f2d; }
-.bar-light  { width: 8px;  background-color: #f78b26; }
+.bar-orange { width: 32px; background-color: rgba(255, 255, 255, 0.7); }
+.bar-green  { width: 16px; background-color: rgba(255, 255, 255, 0.45); }
+.bar-light  { width: 8px;  background-color: rgba(255, 255, 255, 0.25); }
 
 /* ── Card Grid ── */
 .bird-grid {
@@ -331,8 +331,8 @@ onUnmounted(() => {
 /* ── Footer ── */
 .bird-footer {
   padding: 16px 32px;
-  border-top: 1px solid rgba(44, 95, 45, 0.1);
-  background: rgba(211, 227, 187, 0.25);
+  border-top: 1px solid rgba(26, 74, 110, 0.1);
+  background: rgba(208, 228, 245, 0.25);
   display: flex;
   align-items: center;
   justify-content: space-between;

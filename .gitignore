@@ -27,3 +27,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Design drafts and raw source materials
+_design/
+_raw-materials/

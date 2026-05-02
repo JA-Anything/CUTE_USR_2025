@@ -189,7 +189,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 // ── Page ──────────────────────────────────────────────────────────────────────
 .fuyang-gallery {
   min-height: 100vh;
-  background-color: $bg;
+  background-color: #eaf5ee;
 }
 
 // ── Header Banner ─────────────────────────────────────────────────────────────
@@ -197,7 +197,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   width: 100%;
   height: 200px;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #152a1e 0%, #1f4030 100%);
+  background: linear-gradient(160deg, #1a3828 0%, #2c5f42 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -213,7 +213,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 .gallery-header__badge {
   display: inline-block;
   padding: 5px 14px;
-  background-color: #2c5f42;
+  background-color: rgba(255, 255, 255, 0.15);
   color: #fff;
   font-size: 13px;
   border-radius: 999px;
@@ -231,7 +231,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .gallery-header__subtitle {
   font-size: 14px;
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.75);
   margin: 0 0 16px;
 }
 
@@ -248,8 +248,8 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   height: 3px;
   border-radius: 2px;
 
-  &--dark  { background-color: #2c5f42; }
-  &--light { background-color: #4a8f63; }
+  &--dark  { background-color: rgba(255, 255, 255, 0.65); }
+  &--light { background-color: rgba(255, 255, 255, 0.35); }
 }
 
 // ── Photo Grid ────────────────────────────────────────────────────────────────
@@ -275,7 +275,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
-  background-color: #2e2e2e;
+  background-color: #e4f0d6;
 
   img {
     width: 100%;
@@ -329,7 +329,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 .photo-card__border {
   position: absolute;
   inset: 0;
-  border: 1px solid $og1;
+  border: 1px solid #8dc4a0;
   border-radius: 10px;
   pointer-events: none;
   opacity: 0;
@@ -344,7 +344,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: $og1;
+  background-color: #8dc4a0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -405,7 +405,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   justify-content: center;
   transition: background-color 0.2s;
 
-  &:hover { background-color: $og1; }
+  &:hover { background-color: #8dc4a0; }
 }
 
 // ── Lightbox Image Area ───────────────────────────────────────────────────────
@@ -459,7 +459,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   transition: background-color 0.2s;
   z-index: 10;
 
-  &:hover:not(.disabled) { background-color: $og1; }
+  &:hover:not(.disabled) { background-color: #8dc4a0; }
   &.disabled { opacity: 0.2; cursor: default; }
 
   &--left  { left: 12px; }
@@ -514,7 +514,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   transition: opacity 0.2s, border-color 0.2s;
 
   &.active {
-    border-color: $og1;
+    border-color: #8dc4a0;
     opacity: 1;
   }
 

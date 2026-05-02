@@ -160,32 +160,34 @@
 
             <!-- 活動照片 view -->
             <template v-else-if="currentEvent.type === 'with-photos'">
-              <div class="lightbox-photo-grid">
-                <div
-                  v-for="(photo, idx) in currentEvent.activityPhotos"
-                  :key="idx"
-                  class="activity-photo"
-                >
-                  <img :src="photo" :alt="`活動照片 ${idx + 1}`" />
+              <div class="lightbox-photos-scroll">
+                <div class="lightbox-photo-grid">
+                  <div
+                    v-for="(photo, idx) in currentEvent.activityPhotos"
+                    :key="idx"
+                    class="activity-photo"
+                  >
+                    <img :src="photo" :alt="`活動照片 ${idx + 1}`" />
+                  </div>
                 </div>
-              </div>
 
-              <a
-                v-if="currentEvent.newsLink"
-                :href="currentEvent.newsLink.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="news-link-bar"
-              >
-                <span class="news-link-bar__left">
-                  <span class="news-icon">📰</span>
-                  閱讀新聞稿
-                </span>
-                <span class="news-link-bar__right">
-                  {{ currentEvent.newsLink.label }}
-                  <span class="news-ext">↗</span>
-                </span>
-              </a>
+                <a
+                  v-if="currentEvent.newsLink"
+                  :href="currentEvent.newsLink.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="news-link-bar"
+                >
+                  <span class="news-link-bar__left">
+                    <span class="news-icon">📰</span>
+                    閱讀新聞稿
+                  </span>
+                  <span class="news-link-bar__right">
+                    {{ currentEvent.newsLink.label }}
+                    <span class="news-ext">↗</span>
+                  </span>
+                </a>
+              </div>
             </template>
           </div>
         </div>
@@ -221,22 +223,22 @@ type EventData = PosterOnlyEvent | EventWithPhotos
 
 // ── Image imports via Vite glob ──────────────────────────────────────────────
 const globs2024 = import.meta.glob(
-  '@/assets/images/cute/history-events/2024/poster-*.{jpg,png}',
+  '@/assets/images/cute/history-events/2024/poster-*.webp',
   { eager: true, import: 'default' }
 ) as Record<string, string>
 
 const globs2025 = import.meta.glob(
-  '@/assets/images/cute/history-events/2025/poster-*.{jpg,png}',
+  '@/assets/images/cute/history-events/2025/poster-*.webp',
   { eager: true, import: 'default' }
 ) as Record<string, string>
 
 const activity0714 = import.meta.glob(
-  '@/assets/images/cute/history-events/2025/activity/0714/photo-*.jpg',
+  '@/assets/images/cute/history-events/2025/activity/0714/photo-*.webp',
   { eager: true, import: 'default' }
 ) as Record<string, string>
 
 const activity0721 = import.meta.glob(
-  '@/assets/images/cute/history-events/2025/activity/0721/photo-*.jpg',
+  '@/assets/images/cute/history-events/2025/activity/0721/photo-*.webp',
   { eager: true, import: 'default' }
 ) as Record<string, string>
 
@@ -359,14 +361,14 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 // ── Page ─────────────────────────────────────────────────────────────────────
 .cute-history-page {
   min-height: 100vh;
-  background-color: $bg;
+  background-color: #faf2e8;
 }
 
 // ── Header ───────────────────────────────────────────────────────────────────
 .history-header {
   width: 100%;
   height: 220px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2e2e2e 100%);
+  background: linear-gradient(160deg, #2e1a0e 0%, #5c3317 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -379,7 +381,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 .header-badge {
   display: inline-block;
   padding: 4px 14px;
-  background-color: $og1;
+  background-color: rgba(255, 255, 255, 0.15);
   color: #fff;
   font-size: 13px;
   border-radius: 999px;
@@ -395,7 +397,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .header-subtitle {
   font-size: 15px;
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.75);
   margin: 0 0 16px;
 }
 
@@ -411,16 +413,16 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     height: 3px;
     border-radius: 2px;
 
-    &.bar-orange       { background-color: $og1; }
-    &.bar-light-orange { background-color: $og2; }
+    &.bar-orange       { background-color: rgba(255, 255, 255, 0.65); }
+    &.bar-light-orange { background-color: rgba(255, 255, 255, 0.35); }
   }
 }
 
 // ── Tab Bar ───────────────────────────────────────────────────────────────────
 .tab-bar {
   width: 100%;
-  background-color: #1e1e1e;
-  border-bottom: 1px solid #333;
+  background-color: #f5e8d8;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
 }
 
 .tab-bar__inner {
@@ -440,11 +442,11 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   background: none;
   border: none;
   cursor: pointer;
-  color: #666;
+  color: #7a9a7a;
   transition: color 0.2s;
 
-  &:hover { color: #aaa; }
-  &.active { color: $og1; }
+  &:hover { color: #5c3317; }
+  &.active { color: #8b4513; }
 }
 
 .tab-label {
@@ -461,10 +463,10 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border-radius: 50%;
   font-size: 12px;
   color: #fff;
-  background-color: #444;
+  background-color: #c8a07a;
   transition: background-color 0.2s;
 
-  &--active { background-color: $og1; }
+  &--active { background-color: #8b4513; }
 }
 
 .tab-underline {
@@ -473,7 +475,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   left: 0;
   right: 0;
   height: 3px;
-  background-color: $og1;
+  background-color: #8b4513;
 }
 
 // ── Poster Grid ───────────────────────────────────────────────────────────────
@@ -524,7 +526,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   top: 12px;
   left: 12px;
   padding: 3px 8px;
-  background-color: rgba(245, 118, 0, 0.9);
+  background-color: rgba(61, 122, 88, 0.9);
   color: #fff;
   font-size: 12px;
   border-radius: 4px;
@@ -550,7 +552,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 .poster-card__date {
   display: block;
   font-size: 12px;
-  color: $og2;
+  color: #9EC89C;
   margin-bottom: 4px;
 }
 
@@ -564,7 +566,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 .poster-card__hover-border {
   position: absolute;
   inset: 0;
-  border: 1px solid $og1;
+  border: 1px solid #82AA80;
   border-radius: 12px;
   pointer-events: none;
   opacity: 0;
@@ -579,7 +581,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: $og1;
+  background-color: #82AA80;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -613,7 +615,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   gap: 6px;
   transition: color 0.2s;
 
-  &.active { color: $og1; }
+  &.active { color: #82AA80; }
   &:hover:not(.active) { color: #aaa; }
 }
 
@@ -624,7 +626,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background-color: $og1;
+  background-color: #82AA80;
   color: #fff;
   font-size: 11px;
 }
@@ -635,7 +637,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   left: 0;
   right: 0;
   height: 3px;
-  background-color: $og1;
+  background-color: #82AA80;
 }
 
 // ── Activity Photo Grid ───────────────────────────────────────────────────────
@@ -659,7 +661,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
   &:hover {
     filter: brightness(1.1);
-    border-color: $og1;
+    border-color: #82AA80;
   }
 
   img {
@@ -676,17 +678,17 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   align-items: center;
   justify-content: space-between;
   padding: 14px 24px;
-  border-top: 1px solid #333;
+  border-top: 1px solid rgba(0,0,0,0.1);
   text-decoration: none;
   transition: background-color 0.2s;
 
-  &:hover { background-color: rgba(245, 118, 0, 0.06); }
+  &:hover { background-color: rgba(61, 122, 88, 0.06); }
 
   &__left {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #aaa;
+    color: #668a66;
     font-size: 14px;
   }
 
@@ -694,7 +696,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     display: flex;
     align-items: center;
     gap: 4px;
-    color: $og1;
+    color: #3d7a58;
     font-size: 14px;
     text-decoration: underline;
   }
@@ -719,12 +721,24 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   position: relative;
   width: 100%;
   max-width: 960px;
+  max-height: calc(100vh - 32px);
   margin: 0 16px;
   background-color: #1e1e1e;
   border-radius: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.lightbox-photos-scroll {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+
+  &::-webkit-scrollbar        { width: 4px; }
+  &::-webkit-scrollbar-track  { background: transparent; }
+  &::-webkit-scrollbar-thumb  { background-color: #444; border-radius: 2px; }
 }
 
 .lightbox-topbar {
@@ -756,7 +770,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   justify-content: center;
   transition: background-color 0.2s;
 
-  &:hover { background-color: $og1; }
+  &:hover { background-color: #82AA80; }
 }
 
 .lightbox-img-area {
@@ -804,7 +818,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   transition: background-color 0.2s;
   z-index: 10;
 
-  &:hover:not(.disabled) { background-color: $og1; }
+  &:hover:not(.disabled) { background-color: #82AA80; }
   &.disabled { opacity: 0.2; cursor: default; }
 
   &.arrow-left  { left: 12px; }
@@ -825,7 +839,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lightbox-date {
   font-size: 13px;
-  color: $og2;
+  color: #9EC89C;
 }
 
 .lightbox-filmstrip {
@@ -855,7 +869,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   transition: opacity 0.2s, border-color 0.2s;
 
   &.active {
-    border-color: $og1;
+    border-color: #82AA80;
     opacity: 1;
   }
 

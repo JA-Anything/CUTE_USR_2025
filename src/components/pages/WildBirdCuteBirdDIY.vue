@@ -108,7 +108,7 @@
 <script setup lang="ts">
 // ── Image imports (via import.meta.glob so Vite can statically analyse) ──
 const diyGlobs = import.meta.glob(
-  '@/assets/images/wild-bird/diy/diy-*.jpg',
+  '@/assets/images/wild-bird/diy/diy-*.webp',
   { eager: true, import: 'default' }
 ) as Record<string, string>
 
@@ -200,10 +200,10 @@ function onCardLeave(e: MouseEvent) {
 /* ── Page background ── */
 .diy-page-bg {
   min-height: 100vh;
-  background-color: #d3e3bb;
+  background-color: #e8f2fc;
   background-image:
-    radial-gradient(ellipse at 20% 30%, rgba(100,140,60,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 70%, rgba(60,100,40,0.14) 0%, transparent 55%);
+    radial-gradient(ellipse at 20% 30%, rgba(60,100,140,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 70%, rgba(40,80,120,0.14) 0%, transparent 55%);
   padding: 32px 16px 48px;
   display: flex;
   justify-content: center;
@@ -223,8 +223,8 @@ function onCardLeave(e: MouseEvent) {
 /* ── Header ── */
 .diy-header {
   padding: 36px 40px 28px;
-  border-bottom: 1px solid rgba(44,95,45,0.12);
-  background: linear-gradient(135deg, rgba(211,227,187,0.5) 0%, rgba(255,255,255,0) 60%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(160deg, #0d2a3e 0%, #1a4a6e 100%);
   position: relative;
 
   &__deco-emoji {
@@ -232,7 +232,7 @@ function onCardLeave(e: MouseEvent) {
     top: 18px;
     right: 40px;
     font-size: 68px;
-    opacity: 0.07;
+    opacity: 0.1;
     user-select: none;
     line-height: 1;
     transform: rotate(-15deg);
@@ -242,7 +242,7 @@ function onCardLeave(e: MouseEvent) {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 28px;
     font-weight: 700;
-    color: #2c5f2d;
+    color: #fff;
     margin: 0 0 10px;
     letter-spacing: 0.04em;
     line-height: 1.3;
@@ -251,7 +251,7 @@ function onCardLeave(e: MouseEvent) {
   &__desc {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 15px;
-    color: #555;
+    color: rgba(255, 255, 255, 0.75);
     margin: 0;
     line-height: 1.7;
   }
@@ -268,9 +268,9 @@ function onCardLeave(e: MouseEvent) {
   height: 3px;
   border-radius: 2px;
 
-  &--orange-lg { width: 32px; background-color: #F57600; }
-  &--green     { width: 16px; background-color: #2c5f2d; }
-  &--orange-sm { width: 8px;  background-color: #F78B26; }
+  &--orange-lg { width: 32px; background-color: rgba(255, 255, 255, 0.7); }
+  &--green     { width: 16px; background-color: rgba(255, 255, 255, 0.45); }
+  &--orange-sm { width: 8px;  background-color: rgba(255, 255, 255, 0.25); }
 }
 
 /* ── Section wrapper ── */
@@ -341,7 +341,7 @@ function onCardLeave(e: MouseEvent) {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 18px;
     font-weight: 700;
-    color: #2c5f2d;
+    color: #1a4a6e;
     text-align: center;
     margin-bottom: 4px;
   }
@@ -393,7 +393,7 @@ function onCardLeave(e: MouseEvent) {
 .diy-divider {
   margin: 0 40px;
   height: 1px;
-  background-color: rgba(44,95,45,0.1);
+  background-color: rgba(26,74,110,0.1);
 }
 
 /* ── Steps section ── */
@@ -404,7 +404,7 @@ function onCardLeave(e: MouseEvent) {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 20px;
     font-weight: 700;
-    color: #2c5f2d;
+    color: #1a4a6e;
     margin-bottom: 8px;
   }
 
@@ -457,7 +457,7 @@ function onCardLeave(e: MouseEvent) {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    color: #2c5f2d;
+    color: #1a4a6e;
     text-align: center;
     margin-bottom: 6px;
   }
@@ -496,8 +496,8 @@ function onCardLeave(e: MouseEvent) {
 /* ── Footer ── */
 .diy-footer {
   padding: 16px 32px;
-  border-top: 1px solid rgba(44,95,45,0.1);
-  background-color: rgba(211,227,187,0.25);
+  border-top: 1px solid rgba(26,74,110,0.1);
+  background-color: rgba(208,228,245,0.25);
   display: flex;
   align-items: center;
   justify-content: space-between;

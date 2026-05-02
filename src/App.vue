@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Ref, watch, ref, onMounted, onUnmounted } from 'vue'
+import { type Ref, watch, ref, onMounted, onUnmounted, provide } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import Popup from './components/Popup.vue'
 import MenuPopup from './components/MenuPopup.vue'
@@ -182,6 +182,13 @@ const closeMenuPopup = () => {
   currentMenuId.value = ''
 }
 
+// 讓子元件（如首頁）可以直接以 id 開啟對應選單
+const openMenuById = (id: string) => {
+  const entry = headerMenu.find((m) => m.id === id)
+  if (entry?.children) openMenuPopup(entry.children, entry.id ?? '')
+}
+provide('openMenuById', openMenuById)
+
 // 路徑前綴對應 headerMenu 的 index
 const menuPrefixMap: Record<string, number> = {
   'wild-bird': 0,
@@ -303,13 +310,13 @@ onUnmounted(() => {
           <nav>
             <ul>
               <li>
-                <a href="#" class="nav-wild-bird top" @click.prevent="openMenuPopup(headerMenu[0].children)">台北鳥會野鳥救傷中心</a>
+                <a href="#" class="nav-wild-bird top" @click.prevent="openMenuPopup(headerMenu[0].children, headerMenu[0].id)">台北鳥會野鳥救傷中心</a>
               </li>
               <li>
                 <a href="#" class="nav-fuyang top" @click.prevent="openMenuPopup(headerMenu[1].children, headerMenu[1].id)">富陽自然生態公園</a>
               </li>
               <li>
-                <a href="#" class="nav-cute top" @click.prevent="openMenuPopup(headerMenu[2].children)">中國科技大學</a>
+                <a href="#" class="nav-cute top" @click.prevent="openMenuPopup(headerMenu[2].children, headerMenu[2].id)">中國科技大學</a>
               </li>
               <li>
                 <a href="#" class="nav-temple bottom" @click.prevent="openMenuPopup(headerMenu[3].children)">石泉巖清水祖師廟</a>
